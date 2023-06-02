@@ -41,6 +41,26 @@ namespace Sploosh.ViewModels
             }
         }
 
+        private ObservableCollection<ImageHolder> squidsLeftImages;
+
+        public ObservableCollection<ImageHolder> SquidsLeftImages
+        {
+            get { return squidsLeftImages; }
+            set
+            {
+                if (squidsLeftImages != value)
+                {
+                    squidsLeftImages = value;
+
+                    //Necessary for the view to update with the new property change
+                    PropertyChanged(this, new PropertyChangedEventArgs(nameof(SquidsLeftImages)));
+
+
+                }
+            }
+        }
+
+
 
 
         public MainViewModel()
@@ -57,7 +77,19 @@ namespace Sploosh.ViewModels
             }
 
             //Necessary for the view to update with the new property change
-            PropertyChanged(this, new PropertyChangedEventArgs(nameof(BombImages)));
+            //PropertyChanged(this, new PropertyChangedEventArgs(nameof(BombImages)));
+
+            //Load Squids left
+
+            SquidsLeftImages = new ObservableCollection<ImageHolder>();
+
+            for (int i = 0; i < 3; i++)
+            {
+                string squidImagePath = @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidAlive.png";
+                string squidName = $"Squid {i + 1}";
+                SquidsLeftImages.Add(new ImageHolder(squidImagePath, squidName));
+            }
+
 
         }
 
