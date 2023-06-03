@@ -35,6 +35,11 @@ namespace Sploosh
                
                 squidGrid.Children.Add(btn);
 
+                btn.Content = $"{i}";
+
+                btn.Command = mainViewModel.GridClick;
+                btn.CommandParameter = btn.Content;
+
                 //Row calculator
                 int rowNumber = i/8;
                 //Column Calculator
@@ -44,6 +49,9 @@ namespace Sploosh
                 Grid.SetRow(btn, rowNumber);
 
                 Grid.SetColumn(btn, colNumber);
+
+
+
             }
 
         }

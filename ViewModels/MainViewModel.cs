@@ -3,12 +3,14 @@ using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using Sploosh.Images;
@@ -20,6 +22,7 @@ namespace Sploosh.ViewModels
 
     class MainViewModel : INotifyPropertyChanged
     {
+        public ICommand GridClick { get; set; }
 
         private ObservableCollection<ImageHolder> bombImages;
 
@@ -65,6 +68,10 @@ namespace Sploosh.ViewModels
 
         public MainViewModel()
         {
+
+            GridClick = new RelayCommand(ClickGrid, CanClickGrid);
+
+
            //Load Bombs
             
             BombImages = new ObservableCollection<ImageHolder>();
@@ -91,6 +98,22 @@ namespace Sploosh.ViewModels
             }
 
 
+        }
+
+        private bool CanClickGrid(object obj)
+        {
+            return true;
+        }
+
+        private void ClickGrid(object obj)
+        {
+            int btnNumber = 0;
+            if (obj != null)
+            {
+                btnNumber = int.Parse(obj.ToString());
+            }
+
+            Debug.WriteLine($"Grid square # {btnNumber} Clicked");
         }
 
         public event PropertyChangedEventHandler? PropertyChanged = delegate { };
