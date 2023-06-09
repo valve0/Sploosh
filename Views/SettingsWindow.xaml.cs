@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Sploosh.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -22,6 +23,10 @@ namespace Sploosh
         public SettingsWindow()
         {
             InitializeComponent();
+            SettingsViewModel settingsViewModel = new SettingsViewModel();
+            this.DataContext = settingsViewModel;
+
+
         }
     }
 }

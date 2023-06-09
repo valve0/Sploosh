@@ -28,31 +28,31 @@ namespace Sploosh
             this.DataContext = mainViewModel;
 
 
-            for (int i = 0; i < 64; i++)
-            {
-                Button btn = new Button();
-                btn.Style = (Style)Resources["gridButton"];
+            //for (int i = 0; i < 64; i++)
+            //{
+            //    Button btn = new Button();
+            //    btn.Style = (Style)Resources["gridButton"];
                
-                squidGrid.Children.Add(btn);
+            //    squidGrid.Children.Add(btn);
 
-                btn.Content = $"{i}";
+            //    btn.Content = $"{i}";
 
-                btn.Command = mainViewModel.GridClick;
-                btn.CommandParameter = btn.Content;
+            //    btn.Command = mainViewModel.GridClick;
+            //    btn.CommandParameter = btn.Content;
 
-                //Row calculator
-                int rowNumber = i/8;
-                //Column Calculator
-                int colNumber = i%8;
+            //    //Row calculator
+            //    int rowNumber = i/8;
+            //    //Column Calculator
+            //    int colNumber = i%8;
 
-                //squidGrid.Children.Add(btn);
-                Grid.SetRow(btn, rowNumber);
+            //    //squidGrid.Children.Add(btn);
+            //    Grid.SetRow(btn, rowNumber);
 
-                Grid.SetColumn(btn, colNumber);
+            //    Grid.SetColumn(btn, colNumber);
 
 
 
-            }
+            //}
 
         }
 
@@ -60,5 +60,18 @@ namespace Sploosh
         {
 
         }
+
+
+        private void ShowSettingsWindow(object sender, RoutedEventArgs e)
+        {
+            
+                var mainWindow = sender as Window;
+                SettingsWindow settingsWindow = new SettingsWindow();
+                settingsWindow.Owner = mainWindow;
+                settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
+                settingsWindow.ShowDialog();
+        }
+
+
     }
 }

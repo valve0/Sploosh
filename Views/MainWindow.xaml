@@ -4,7 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:uc="clr-namespace:Sploosh.Views"
-        xmlns:local="clr-namespace:Sploosh"
+        xmlns:local="clr-namespace:Sploosh" xmlns:viewmodels="clr-namespace:Sploosh.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
         ResizeMode="NoResize">
@@ -14,7 +14,7 @@
             <Image Source="yourimage.png"/>
         </ControlTemplate>
 
-        <Image x:Key="seaImage" Source="sea.jpg"/>
+        <Image x:Key="seaImage"/>
             <ImageBrush x:Key="titleImage" ImageSource ="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\title.png" />
 
             <Style TargetType="Button" x:Key="gridButton" >
@@ -52,7 +52,7 @@
         </Grid.Background>
 
         <!-- LayoutGrid- Settings, Title and Feedback -->
-        <Grid ShowGridLines="True">
+        <Grid ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="800"/>
@@ -73,11 +73,11 @@
 
             <Button x:Name="Settings" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
                     HorizontalAlignment="Right" Height="50" Width="100"
-                    Content="Settings"/>
+                    Content="Settings" Click="ShowSettingsWindow" Command="{ Binding ShowSettingsWindowCommand}"/>
 
 
             <!-- Bomb Grid -->
-            <Grid Grid.Row="1" Grid.Column="0" ShowGridLines="True">
+            <Grid Grid.Row="1" Grid.Column="0" ShowGridLines="False">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -148,7 +148,7 @@
             </Grid>
 
             <!-- HighScore and Squids left grid -->
-            <Grid Grid.Row="1" Grid.Column="3" ShowGridLines="True">
+            <Grid Grid.Row="1" Grid.Column="3" ShowGridLines="False">
 
 
                 <Grid.RowDefinitions>
@@ -161,7 +161,8 @@
                 </StackPanel>
 
                 <Viewbox Grid.Row="1" Stretch="Fill" >
-                    <ListView BorderBrush="Transparent" ItemsSource="{Binding SquidsLeftImages}" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Background="Transparent">
+                    <ListView BorderBrush="Transparent" ItemsSource="{Binding SquidsLeftImages}" HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch" Background="Transparent" HorizontalContentAlignment="Stretch">
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
@@ -178,12 +179,12 @@
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="1" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <UniformGrid Columns="1" HorizontalAlignment="Center" VerticalAlignment="Center"  />
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                                <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Height="50" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -193,37 +194,37 @@
 
 
             <!-- Main Squid Grid -->
-            <Grid x:Name="squidGrid" Grid.Row="1" Grid.Column="1" ShowGridLines="False" Margin="0">
+            <ListView Grid.Row="1" Grid.Column="1" BorderBrush="Transparent"  ItemsSource="{Binding ConvertedSquares}"
+                      Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                      HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding SelectedIndex}">
 
-                <Grid.Background>
-                    <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\sea.jpg" Stretch="UniformToFill" Opacity="0.2"/>
-                </Grid.Background>
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="{x:Type ListViewItem}">
+                        <Setter Property="Background" Value="Transparent" />
+                        <Setter Property="Template">
+                            <Setter.Value>
+                                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                    <ContentPresenter />
+                                </ControlTemplate>
+                            </Setter.Value>
+                        </Setter>
+                    </Style>
+                </ListView.ItemContainerStyle>
 
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                    <ColumnDefinition Width="100"/>
-                </Grid.ColumnDefinitions>
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
 
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                    <RowDefinition Height="100"/>
-                </Grid.RowDefinitions>
 
-                
 
-            </Grid>
+            </ListView>
 
         </Grid>
 

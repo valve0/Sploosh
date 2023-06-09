@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Sploosh"
         mc:Ignorable="d"
-        Title="SettingsWindow" Height="220" Width="200">
+        Title="SettingsWindow" Height="250" Width="200">
     <Grid>
         <StackPanel Margin="10" VerticalAlignment="Center">
 
