@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -22,10 +23,13 @@ namespace Sploosh
     {
         public SettingsWindow()
         {
+
+
             InitializeComponent();
             SettingsViewModel settingsViewModel = new SettingsViewModel();
             this.DataContext = settingsViewModel;
-
+            Owner = Application.Current.MainWindow;
+            WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
         }
     }

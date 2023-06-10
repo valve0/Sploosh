@@ -9,9 +9,11 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
 using Sploosh.ViewModels;
 
 namespace Sploosh
@@ -21,40 +23,72 @@ namespace Sploosh
     /// </summary>
     public partial class MainWindow : Window
     {
+
+        private MediaPlayer backgroundPlayer = new MediaPlayer();
+        private MediaPlayer hitSoundPlayer = new MediaPlayer();
+        private MediaPlayer missSoundPlayer = new MediaPlayer();
+        private MediaPlayer killedSoundPlayer = new MediaPlayer();
+
         public MainWindow()
         {
             InitializeComponent();
             MainViewModel mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
+            //DataContextChanged += ViewModelSaidDoSomething;
+            mainViewModel.AttackEvent += AttackMethod;
+            mainViewModel.SquidKilledEvent += SquidKilledMethod;
+
+            backgroundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\pirateship.mp3", UriKind.Relative));
+            backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
+            backgroundPlayer.Play();
+            
 
 
-            //for (int i = 0; i < 64; i++)
-            //{
-            //    Button btn = new Button();
-            //    btn.Style = (Style)Resources["gridButton"];
-               
-            //    squidGrid.Children.Add(btn);
-
-            //    btn.Content = $"{i}";
-
-            //    btn.Command = mainViewModel.GridClick;
-            //    btn.CommandParameter = btn.Content;
-
-            //    //Row calculator
-            //    int rowNumber = i/8;
-            //    //Column Calculator
-            //    int colNumber = i%8;
-
-            //    //squidGrid.Children.Add(btn);
-            //    Grid.SetRow(btn, rowNumber);
-
-            //    Grid.SetColumn(btn, colNumber);
-
-
-
-            //}
 
         }
+
+        private void SquidKilledMethod()
+        {
+            killedSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\SquidDead.mp3", UriKind.Relative));
+            killedSoundPlayer.Play();
+        }
+
+        private void BackgroundMusicEnded(object sender, EventArgs e)
+        {
+            backgroundPlayer.Position = TimeSpan.Zero;
+            backgroundPlayer.Play();
+        }
+
+        private void AttackMethod(bool hit)
+        {
+
+
+            if (hit == true)
+            {
+                hitSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\kaboom.mp3", UriKind.Relative));
+                hitSoundPlayer.Play();
+
+                DoubleAnimation leftAnimation = new DoubleAnimation();
+
+                leftAnimation.From = this.Left;
+                leftAnimation.To = this.Left - 10;
+                leftAnimation.Duration = TimeSpan.FromSeconds(0.1);
+                leftAnimation.AutoReverse = true;
+                mainWindow.BeginAnimation(Window.LeftProperty, leftAnimation);
+
+            }
+            else
+            {
+                //if(missSoundPlayer.CanPause) //If playing
+
+                missSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\sploosh.mp3", UriKind.Relative));
+                missSoundPlayer.Play();
+            }
+
+
+
+        }
+
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
@@ -65,10 +99,7 @@ namespace Sploosh
         private void ShowSettingsWindow(object sender, RoutedEventArgs e)
         {
             
-                var mainWindow = sender as Window;
                 SettingsWindow settingsWindow = new SettingsWindow();
-                settingsWindow.Owner = mainWindow;
-                settingsWindow.WindowStartupLocation = WindowStartupLocation.CenterOwner;
                 settingsWindow.ShowDialog();
         }
 

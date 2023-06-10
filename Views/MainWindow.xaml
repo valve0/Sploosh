@@ -7,7 +7,9 @@
         xmlns:local="clr-namespace:Sploosh" xmlns:viewmodels="clr-namespace:Sploosh.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize"
+        Name="mainWindow"
+        WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
         <ControlTemplate x:Key="cornerButton">
@@ -43,7 +45,27 @@
             </Style>
 
 
+
+        
+        <!--<ObjectDataProvider x:Key="src" ObjectType="{x:Type loc:SquidImages}"></ObjectDataProvider>-->
+
+
     </Window.Resources>
+
+
+
+    <!--<Window.Triggers>
+        <EventTrigger RoutedEvent="">
+            <EventTrigger.Actions>
+                <BeginStoryboard>
+                    <Storyboard BeginTime="0" Duration="Forever">
+                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="(Window.Top)" From="0" To="10" AutoReverse="true" BeginTime="0:0:0" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="(Window.Left)" From="0" To="10" AutoReverse="true" BeginTime="0:0:0" Duration="0:0:0.5" RepeatBehavior="Forever"/>
+                    </Storyboard>
+                </BeginStoryboard>
+            </EventTrigger.Actions>
+        </EventTrigger>
+    </Window.Triggers>-->
 
     <!-- Background Grid -->
     <Grid>
@@ -156,13 +178,16 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Highscore:" Foreground="AliceBlue"/>
-                    <TextBlock x:Name="highScore" Grid.Row="0" Grid.Column="0" Foreground="AliceBlue" Text="{Binding highScore}" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    <TextBlock Text="Highscore: " Foreground="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
+                    <TextBlock x:Name="highScore" Grid.Row="0" Grid.Column="0" Foreground="AliceBlue" Text="{Binding Highscore}"
+                               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
                 </StackPanel>
 
-                <Viewbox Grid.Row="1" Stretch="Fill" >
-                    <ListView BorderBrush="Transparent" ItemsSource="{Binding SquidsLeftImages}" HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch" Background="Transparent" HorizontalContentAlignment="Stretch">
+
+
+                <Viewbox Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300"  >
+                    <ListView BorderBrush="Transparent" ItemsSource="{Binding SquidsLeftImages}" HorizontalAlignment="Left"
+                              VerticalAlignment="Top" Background="Transparent" HorizontalContentAlignment="Right" VerticalContentAlignment="Top" >
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
@@ -170,21 +195,17 @@
                                 <Setter Property="Template">
                                     <Setter.Value>
                                         <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                            <ContentPresenter />
+                                            <ContentPresenter HorizontalAlignment="Left" />
                                         </ControlTemplate>
                                     </Setter.Value>
                                 </Setter>
                             </Style>
                         </ListView.ItemContainerStyle>
 
-                        <ItemsControl.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <UniformGrid Columns="1" HorizontalAlignment="Center" VerticalAlignment="Center"  />
-                            </ItemsPanelTemplate>
-                        </ItemsControl.ItemsPanel>
+
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="UniformToFill" Height="50" />
+                                <Image Source="{Binding ImagePath}" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>

@@ -17,6 +17,7 @@ using System.Xml.Linq;
 using Sploosh.Models;
 using System.Data.SqlTypes;
 using System.Windows;
+using LeSploosh;
 
 namespace Sploosh.ViewModels
 {
@@ -24,7 +25,19 @@ namespace Sploosh.ViewModels
     //= new RelayCommand(SelectImageMethod, CanSelectImage);
 
     class MainViewModel : INotifyPropertyChanged
+
+
     {
+        
+        public delegate void AttackEventAction(bool hit);
+        public event AttackEventAction? AttackEvent;
+
+
+        
+        public delegate void SquidKilledEventAction();
+        public event SquidKilledEventAction? SquidKilledEvent;
+
+
         public ICommand ShowSettingsWindowCommand { get; set; }
 
         private int shotCounter;
@@ -45,7 +58,25 @@ namespace Sploosh.ViewModels
             }
         }
 
+        private int _highscore;
 
+        public int Highscore
+        {
+            get { return _highscore; }
+            set
+            {
+                if (_highscore != value)
+                {
+                    _highscore = value;
+
+                    //Necessary for the view to update with the new property change
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+
+        //Acts as a form of kill counter
         private int squidKillIndex = 0;
         //public ICommand GridClick { get; set; }
         private ObservableCollection<Square> _convertedSquares;
@@ -88,28 +119,6 @@ namespace Sploosh.ViewModels
 
         public ObservableCollection<Squid> Squids;
 
-        //public Square _selectedSquare;
-
-        //public Square SelectedSquare
-        //{
-        //    get { return _selectedSquare; }
-        //    set
-        //    {
-        //        if (_selectedSquare != value)
-        //        {
-                    
-        //            _selectedSquare = value;
-
-        //            //Necessary for the view to update with the new property change
-        //            OnPropertyChanged();
-
-        //            int name = _selectedSquare.ID;
-
-        //            Debug.WriteLine($"Selected Square: {name}");
-        //        }
-
-        //    }
-        //}
 
         private int _selectedIndex =-1;
 
@@ -211,6 +220,11 @@ namespace Sploosh.ViewModels
 
         private void SetupGame()
         {
+            //Reset kill counter index
+            squidKillIndex = 0;
+
+            Highscore = int.Parse(TextFileRepository.LoadStringFromFile("Highscore.txt").Replace("\r\n", string.Empty));
+            //string Highscoress = TextFileRepository.LoadStringFromFile("Highscore.txt");
 
             ShotCounter = 0;
 
@@ -310,10 +324,6 @@ namespace Sploosh.ViewModels
             OnPropertyChanged(propertyName);
             return true;
         }
-
-
-
-
 
         private void PlaceFirstPartOfSquid(ref List<int[]> squidPartPositions)
         {
@@ -496,29 +506,48 @@ namespace Sploosh.ViewModels
 
             if (ConvertedSquares[selectedIndex].AttackStatus) //If attackable
             {
+
+                if (ConvertedSquares[selectedIndex].SquidPresent == true)
+                {
+                    
+                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareHit.png");
+
+                    if (ConvertedSquares[selectedIndex].AttackSquid())
+                    {
+                        //Returned true which means a squid killed
+
+                        SquidsLeftImages[squidKillIndex].ImagePath =
+                            new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidDead.png");
+
+                        squidKillIndex++;
+
+                        SquidKilledEvent?.Invoke();
+
+                    }
+                    else
+                        AttackEvent?.Invoke(true); //Hit
+
+                }
+                
+                else 
+                {
+
+                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareMiss.png");
+
+                    AttackEvent?.Invoke(false); //Miss
+                }
+
+
                 //Change a bomb to unavailable
                 BombImages[ShotCounter].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BombUnavailable.png");
                 ShotCounter++;
-
-
-                if (ConvertedSquares[selectedIndex].AttackSquare())
-                {
-                    //Returned true which means a squid killed
-
-                    SquidsLeftImages[squidKillIndex].ImagePath =
-                        new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidDead.png");
-                    
-
-                    squidKillIndex++;
-
-
-                }
 
                 UpdateMainWindow();
 
                 if (squidKillIndex == numberOfSquid)
                 {
                     MessageBox.Show("You Win");
+                    CheckForHighScore();
                     SetupGame();
 
                 }
@@ -530,8 +559,27 @@ namespace Sploosh.ViewModels
 
             }
 
-
         }
+
+
+        public void CheckForHighScore()
+        {
+            string HighScoreFileName = "Highscore.txt";
+
+
+            if (ShotCounter < Highscore)
+            {
+                //update highscore property and textfile
+                Highscore = ShotCounter;
+                TextFileRepository.WriteStringToFile(HighScoreFileName, Highscore.ToString());
+
+            }
+            
+        }
+
+
+
+
     }
 }
 
