@@ -10,7 +10,7 @@ namespace Sploosh.Models
     {
 
 
-        public Uri ImagePath { get; set; } = new Uri( @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareStart2.png");
+        public Uri ImagePath { get; set; } = new Uri( @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareStart4.png");
 
         public int ID { get; set; }
 

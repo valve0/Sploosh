@@ -11,10 +11,12 @@
     <None Remove="Images\Background.jpg" />
     <None Remove="Images\BombAvailable.png" />
     <None Remove="Images\BombUnavailable.png" />
+    <None Remove="Images\BombUnvailable2.png" />
     <None Remove="Images\SquareHit.png" />
     <None Remove="Images\SquareMiss.png" />
     <None Remove="Images\SquareStart.png" />
     <None Remove="Images\SquareStart2.png" />
+    <None Remove="Images\SquareStart3.png" />
     <None Remove="Images\SquidAlive.png" />
     <None Remove="Images\SquidDead.png" />
     <None Remove="Images\Title.png" />
@@ -27,10 +29,12 @@
   <ItemGroup>
     <Resource Include="Images\BombAvailable.png" />
     <Resource Include="Images\BombUnavailable.png" />
+    <Resource Include="Images\BombUnvailable2.png" />
     <Resource Include="Images\SquareHit.png" />
     <Resource Include="Images\SquareMiss.png" />
     <Resource Include="Images\SquareStart.png" />
     <Resource Include="Images\SquareStart2.png" />
+    <Resource Include="Images\SquareStart3.png" />
     <Resource Include="Images\SquidAlive.png" />
     <Resource Include="Images\SquidDead.png" />
     <Resource Include="Images\Title.png" />

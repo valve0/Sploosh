@@ -251,7 +251,7 @@ namespace Sploosh.ViewModels
 
             for (int i = 0; i < maxShotCount; i++)
             {
-                string bombImagePath = @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BombAvailable.png";
+                string bombImagePath = @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BombUnavailable.png";
                 string bombName = $"Bomb {i + 1}";
                 BombImages.Add(new ImageHolder(bombImagePath, bombName));
             }
@@ -271,7 +271,7 @@ namespace Sploosh.ViewModels
 
             for (int i = 0; i < numberOfSquid; i++)
             {
-                string squidImagePath = @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidAlive.png";
+                string squidImagePath = @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidAlive2.png";
                 string squidName = $"Squid {i + 1}";
                 SquidsLeftImages.Add(new ImageHolder(squidImagePath, squidName));
             }
@@ -510,14 +510,14 @@ namespace Sploosh.ViewModels
                 if (ConvertedSquares[selectedIndex].SquidPresent == true)
                 {
                     
-                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareHit.png");
+                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareHit2.png");
 
                     if (ConvertedSquares[selectedIndex].AttackSquid())
                     {
                         //Returned true which means a squid killed
 
                         SquidsLeftImages[squidKillIndex].ImagePath =
-                            new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidDead.png");
+                            new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquidDead2.png");
 
                         squidKillIndex++;
 
@@ -532,14 +532,14 @@ namespace Sploosh.ViewModels
                 else 
                 {
 
-                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareMiss.png");
+                    ConvertedSquares[selectedIndex].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareMiss2.png");
 
                     AttackEvent?.Invoke(false); //Miss
                 }
 
 
                 //Change a bomb to unavailable
-                BombImages[ShotCounter].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BombUnavailable.png");
+                BombImages[ShotCounter].ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BombUnvailable2.png");
                 ShotCounter++;
 
                 UpdateMainWindow();

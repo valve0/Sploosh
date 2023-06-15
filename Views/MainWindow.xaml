@@ -16,6 +16,15 @@
             <Image Source="yourimage.png"/>
         </ControlTemplate>
 
+        <Style TargetType="Label">
+            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+            <Setter Property="Foreground" Value="Black"/>
+            <Setter Property="Background" Value="Transparent"></Setter>
+            <Setter Property="FontSize" Value="25"/>
+        </Style>
+
+
+
         <Image x:Key="seaImage"/>
             <ImageBrush x:Key="titleImage" ImageSource ="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\title.png" />
 
@@ -44,9 +53,21 @@
                 </Setter>
             </Style>
 
+        <Style x:Key="GridBorder" TargetType="ListViewItem">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListViewItem">
+                        <Border Name="Border"  BorderBrush="Black" BorderThickness="1" Opacity="0.6" >
+                            <ContentPresenter />
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
 
 
-        
+
+
         <!--<ObjectDataProvider x:Key="src" ObjectType="{x:Type loc:SquidImages}"></ObjectDataProvider>-->
 
 
@@ -70,7 +91,7 @@
     <!-- Background Grid -->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Background.jpg" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Pergament1.png" Stretch="UniformToFill" />
         </Grid.Background>
 
         <!-- LayoutGrid- Settings, Title and Feedback -->
@@ -82,19 +103,20 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="auto"/>
                 <RowDefinition Height="800"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
 
-            <Image x:Name="img" Grid.Column="1" Source="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Title.png" HorizontalAlignment="Center" VerticalAlignment="Center"  Margin="0 10 0 0" />
-
-            <TextBlock Grid.Column="1" Grid.Row="2" Text="{Binding feedback}"  HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="25" Foreground="AliceBlue" ></TextBlock>
+            <!--<Image x:Name="img" Grid.Column="1" Source="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\TitleAsciiWhite.png" HorizontalAlignment="Center"  VerticalAlignment="Center"  Margin="0 0 0 0"  />-->
+            <Label Grid.Column="1" FontSize="70" Content="Sploosh" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+            <Label Grid.Column="1" Grid.Row="2" Content="{Binding feedback}"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
 
 
             <Button x:Name="Settings" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
-                    HorizontalAlignment="Right" Height="50" Width="100"
+                    HorizontalAlignment="Right" Height="50" Width="100" Margin="10"
                     Content="Settings" Click="ShowSettingsWindow" Command="{ Binding ShowSettingsWindowCommand}"/>
 
 
@@ -115,15 +137,13 @@
                
                     <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
 
-                        <TextBlock Text="Shot Counter:"
-                                   Foreground="AliceBlue"
-                                   VerticalAlignment="Center"
+                        <Label Content="Shot Counter "
+                               VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="10"/>
 
-                        <TextBlock Text="{Binding ShotCounter}"
-                                   Foreground="AliceBlue"
-                                   VerticalAlignment="Center"
+                        <Label  Content="{Binding ShotCounter}"
+                                VerticalAlignment="Center"
                                    HorizontalAlignment="Center"
                                    Margin="10"/>
 
@@ -174,13 +194,24 @@
 
 
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
+
+
                 <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
-                    <TextBlock Text="Highscore: " Foreground="AliceBlue" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="10"/>
-                    <TextBlock x:Name="highScore" Grid.Row="0" Grid.Column="0" Foreground="AliceBlue" Text="{Binding Highscore}"
-                               HorizontalAlignment="Center" VerticalAlignment="Center" Margin="10"/>
+
+                    <Label Content="Highscore  "
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="10"/>
+
+                    <Label x:Name="highScore"
+                           Content="{Binding Highscore}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="10"/>
+
                 </StackPanel>
 
 
@@ -213,24 +244,15 @@
 
             </Grid>
 
+            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"  >
 
-            <!-- Main Squid Grid -->
+                <!-- Main Squid Grid -->
             <ListView Grid.Row="1" Grid.Column="1" BorderBrush="Transparent"  ItemsSource="{Binding ConvertedSquares}"
                       Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                      HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding SelectedIndex}">
+                      HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding SelectedIndex}"
+                      ItemContainerStyle="{StaticResource GridBorder}">
 
-                <ListView.ItemContainerStyle>
-                    <Style TargetType="{x:Type ListViewItem}">
-                        <Setter Property="Background" Value="Transparent" />
-                        <Setter Property="Template">
-                            <Setter.Value>
-                                <ControlTemplate TargetType="{x:Type ListViewItem}">
-                                    <ContentPresenter />
-                                </ControlTemplate>
-                            </Setter.Value>
-                        </Setter>
-                    </Style>
-                </ListView.ItemContainerStyle>
+                
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
@@ -239,13 +261,16 @@
                 </ItemsControl.ItemsPanel>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                        <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"  />
                     </DataTemplate>
                 </ListView.ItemTemplate>
+
+                
 
 
 
             </ListView>
+            </Border>
 
         </Grid>
 

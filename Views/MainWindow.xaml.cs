@@ -51,6 +51,8 @@ namespace Sploosh
         {
             killedSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\SquidDead.mp3", UriKind.Relative));
             killedSoundPlayer.Play();
+
+            ScreenShakeAnimation();
         }
 
         private void BackgroundMusicEnded(object sender, EventArgs e)
@@ -68,13 +70,7 @@ namespace Sploosh
                 hitSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\kaboom.mp3", UriKind.Relative));
                 hitSoundPlayer.Play();
 
-                DoubleAnimation leftAnimation = new DoubleAnimation();
-
-                leftAnimation.From = this.Left;
-                leftAnimation.To = this.Left - 10;
-                leftAnimation.Duration = TimeSpan.FromSeconds(0.1);
-                leftAnimation.AutoReverse = true;
-                mainWindow.BeginAnimation(Window.LeftProperty, leftAnimation);
+                ScreenShakeAnimation();
 
             }
             else
@@ -89,6 +85,16 @@ namespace Sploosh
 
         }
 
+        private void ScreenShakeAnimation()
+        {
+            DoubleAnimation leftAnimation = new DoubleAnimation();
+
+            leftAnimation.From = this.Left;
+            leftAnimation.To = this.Left - 10;
+            leftAnimation.Duration = TimeSpan.FromSeconds(0.1);
+            leftAnimation.AutoReverse = true;
+            mainWindow.BeginAnimation(Window.LeftProperty, leftAnimation);
+        }
 
         private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
