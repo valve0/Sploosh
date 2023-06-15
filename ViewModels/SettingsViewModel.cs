@@ -9,12 +9,63 @@ namespace Sploosh.ViewModels
 {
     class SettingsViewModel
     {
-       public ICommand QuitCommand { get; set; }
+        // Help from https://stackoverflow.com/questions/44829097/what-is-the-mvvm-way-to-call-wpf-command-from-another-viewmodel
+        private ISetupGame _mainViewModel;
 
-       public SettingsViewModel()
+        public ICommand QuitCommand { get; set; }
+       public ICommand RestartCommand { get; set; }
+       public ICommand HelpCommand { get; set; }
+       public ICommand BackCommand { get; set; }
+       public ICommand AboutCommand { get; set; }
+
+       public SettingsViewModel(ISetupGame mainViewModel)
        {
+           _mainViewModel = mainViewModel;
+
            QuitCommand = new RelayCommand(QuitApplication, CanQuitApplication);
+           RestartCommand = new RelayCommand(RestartApplication, CanRestartApplication);
+           HelpCommand = new RelayCommand(OpenHelpWindow, CanOpenHelpWindow);
+           BackCommand = new RelayCommand(CloseSettingsWindow, CanCloseSettingsWindow);
+           AboutCommand = new RelayCommand(OpenAboutWindow, CanOpenAboutWindow);
+
        }
+
+        private bool CanOpenAboutWindow(object obj)
+        {
+            return true;
+        }
+
+        private void OpenAboutWindow(object obj)
+        {
+        }
+
+        private bool CanCloseSettingsWindow(object obj)
+        {
+            return true;
+        }
+
+        private void CloseSettingsWindow(object obj)
+        {
+        }
+
+        private bool CanOpenHelpWindow(object obj)
+        {
+            return true;
+        }
+
+        private void OpenHelpWindow(object obj)
+        {
+        }
+
+        private bool CanRestartApplication(object obj)
+        {
+            return true;
+        }
+
+        private void RestartApplication(object obj)
+        {
+            _mainViewModel.SetupGame();
+        }
 
         private bool CanQuitApplication(object obj)
         {

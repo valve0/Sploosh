@@ -7,20 +7,31 @@
         mc:Ignorable="d"
         ResizeMode="NoResize"
         WindowStartupLocation="CenterOwner"
-        Title="SettingsWindow" Height="300" Width="200">
+        Title="SettingsWindow" Height="300" Width="200"
+        WindowStyle="None">
     <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Pergament1.png" Stretch="UniformToFill" />
+        </Grid.Background>
+
         <StackPanel Margin="10" VerticalAlignment="Center">
 
+            <Button x:Name="backButton" Margin="0 0 0 10"  Command="{Binding BackCommand}"
+                    Height="20" Width="50" HorizontalAlignment="Left"
+                    Click="BackButton_OnClick">
+                    <Image Source="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\BackArrow.png"/>
+            </Button>
+
             <Button x:Name="helpButton" Margin="0 0 0 10"  Command="{Binding HelpCommand}"
-                    Height="50" Width="100"
+                    Height="50" Width="100" Click="HelpButton_OnClick"
                     Content="Help"/>
 
             <Button x:Name="aboutButton" Margin="0 0 0 10"  Command="{Binding AboutCommand}"
-                    Height="50" Width="100"
+                    Height="50" Width="100" Click="AboutButton_OnClick"
                     Content="About"/>
 
             <Button x:Name="restartButton" Margin="0 0 0 10"   Command="{Binding RestartCommand}"
-                    Height="50" Width="100"
+                    Height="50" Width="100" Click="RestartButton_OnClick"
                     Content="Restart"/>
 
             <Button x:Name="quitButton"   Command="{Binding QuitCommand}"

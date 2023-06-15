@@ -12,6 +12,7 @@
     <None Remove="Images\BombAvailable.png" />
     <None Remove="Images\BombUnavailable.png" />
     <None Remove="Images\BombUnvailable2.png" />
+    <None Remove="Images\Pergament1.png" />
     <None Remove="Images\SquareHit.png" />
     <None Remove="Images\SquareMiss.png" />
     <None Remove="Images\SquareStart.png" />
@@ -30,6 +31,7 @@
     <Resource Include="Images\BombAvailable.png" />
     <Resource Include="Images\BombUnavailable.png" />
     <Resource Include="Images\BombUnvailable2.png" />
+    <Resource Include="Images\Pergament1.png" />
     <Resource Include="Images\SquareHit.png" />
     <Resource Include="Images\SquareMiss.png" />
     <Resource Include="Images\SquareStart.png" />

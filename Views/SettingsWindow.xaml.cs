@@ -21,16 +21,44 @@ namespace Sploosh
     /// </summary>
     public partial class SettingsWindow : Window
     {
-        public SettingsWindow()
+        public SettingsWindow(ISetupGame _mainViewModel)
         {
 
 
             InitializeComponent();
-            SettingsViewModel settingsViewModel = new SettingsViewModel();
+            SettingsViewModel settingsViewModel = new SettingsViewModel(_mainViewModel);
             this.DataContext = settingsViewModel;
             Owner = Application.Current.MainWindow;
             WindowStartupLocation = WindowStartupLocation.CenterOwner;
 
+        }
+
+        private void GoBack(object sender, RoutedEventArgs e)
+        {
+            
+        }
+
+
+        private void RestartButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        private void AboutButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.Show();
+        }
+
+        private void HelpButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            var helpWindow = new HelpWindow();
+            helpWindow.Show();
+        }
+
+        private void BackButton_OnClick(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

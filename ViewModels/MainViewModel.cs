@@ -24,9 +24,7 @@ namespace Sploosh.ViewModels
     //PropertyChanged(this, new PropertyChangedEventArgs("ImagePath"));
     //= new RelayCommand(SelectImageMethod, CanSelectImage);
 
-    class MainViewModel : INotifyPropertyChanged
-
-
+    class MainViewModel : INotifyPropertyChanged, ISetupGame
     {
         
         public delegate void AttackEventAction(bool hit);
@@ -218,7 +216,7 @@ namespace Sploosh.ViewModels
 
         }
 
-        private void SetupGame()
+        public void SetupGame()
         {
             //Reset kill counter index
             squidKillIndex = 0;
@@ -580,6 +578,13 @@ namespace Sploosh.ViewModels
 
 
 
+    }
+
+
+
+    public interface ISetupGame
+    {
+        void SetupGame(); 
     }
 }
 

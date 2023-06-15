@@ -12,63 +12,7 @@
         WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
-        <ControlTemplate x:Key="cornerButton">
-            <Image Source="yourimage.png"/>
-        </ControlTemplate>
 
-        <Style TargetType="Label">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="FontSize" Value="25"/>
-        </Style>
-
-
-
-        <Image x:Key="seaImage"/>
-            <ImageBrush x:Key="titleImage" ImageSource ="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\title.png" />
-
-            <Style TargetType="Button" x:Key="gridButton" >
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="Transparent"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Name="border" 
-                                    BorderThickness="1"
-                                    Padding="4,2" 
-                                    BorderBrush="DarkGray" 
-                                    CornerRadius="3" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="border" Property="BorderBrush" Value="Black" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-            </Style>
-
-        <Style x:Key="GridBorder" TargetType="ListViewItem">
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <Border Name="Border"  BorderBrush="Black" BorderThickness="1" Opacity="0.6" >
-                            <ContentPresenter />
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
-
-
-
-
-        <!--<ObjectDataProvider x:Key="src" ObjectType="{x:Type loc:SquidImages}"></ObjectDataProvider>-->
 
 
     </Window.Resources>
@@ -91,7 +35,7 @@
     <!-- Background Grid -->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Pergament1.png" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Pergament1.png" Stretch="UniformToFill" />
         </Grid.Background>
 
         <!-- LayoutGrid- Settings, Title and Feedback -->
@@ -247,26 +191,22 @@
             <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"  >
 
                 <!-- Main Squid Grid -->
-            <ListView Grid.Row="1" Grid.Column="1" BorderBrush="Transparent"  ItemsSource="{Binding ConvertedSquares}"
-                      Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
+            <ListView Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding ConvertedSquares}"
+                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
                       HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding SelectedIndex}"
-                      ItemContainerStyle="{StaticResource GridBorder}">
-
-                
+                      ItemContainerStyle="{StaticResource GridBorder}"  Style="{StaticResource ListViewStyle}">
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
                         <UniformGrid Columns="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
+
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"  />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
-                
-
 
 
             </ListView>

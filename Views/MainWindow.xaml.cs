@@ -23,7 +23,7 @@ namespace Sploosh
     /// </summary>
     public partial class MainWindow : Window
     {
-
+        private MainViewModel mainViewModel;
         private MediaPlayer backgroundPlayer = new MediaPlayer();
         private MediaPlayer hitSoundPlayer = new MediaPlayer();
         private MediaPlayer missSoundPlayer = new MediaPlayer();
@@ -32,7 +32,7 @@ namespace Sploosh
         public MainWindow()
         {
             InitializeComponent();
-            MainViewModel mainViewModel = new MainViewModel();
+            mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
             //DataContextChanged += ViewModelSaidDoSomething;
             mainViewModel.AttackEvent += AttackMethod;
@@ -105,7 +105,7 @@ namespace Sploosh
         private void ShowSettingsWindow(object sender, RoutedEventArgs e)
         {
             
-                SettingsWindow settingsWindow = new SettingsWindow();
+                SettingsWindow settingsWindow = new SettingsWindow(mainViewModel);
                 settingsWindow.ShowDialog();
         }
 
