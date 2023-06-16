@@ -87,6 +87,7 @@ namespace Sploosh
 
         private void ScreenShakeAnimation()
         {
+            
             DoubleAnimation leftAnimation = new DoubleAnimation();
 
             leftAnimation.From = this.Left;
