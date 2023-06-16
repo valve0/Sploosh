@@ -90,8 +90,8 @@ namespace Sploosh
             DoubleAnimation leftAnimation = new DoubleAnimation();
 
             leftAnimation.From = this.Left;
-            leftAnimation.To = this.Left - 10;
-            leftAnimation.Duration = TimeSpan.FromSeconds(0.1);
+            leftAnimation.To = this.Left - 30;
+            leftAnimation.Duration = TimeSpan.FromSeconds(0.15);
             leftAnimation.AutoReverse = true;
             mainWindow.BeginAnimation(Window.LeftProperty, leftAnimation);
         }

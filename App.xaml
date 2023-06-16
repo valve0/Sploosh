@@ -33,76 +33,15 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="DarkGoldenrod"/>
+                    <Setter Property="Foreground" Value="LightSkyBlue"/>
                     <Setter Property="Opacity" Value="0.7"/>
                 </Trigger>
             </Style.Triggers>
 
         </Style>
 
-
-
-        <!--<Image x:Key="seaImage"/>
-            <ImageBrush x:Key="titleImage" ImageSource ="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\title.png" />
-
-        <Style TargetType="Button" x:Key="gridButton" >
-                <Setter Property="Margin" Value="0"/>
-                <Setter Property="Background" Value="Transparent"/>
-                <Setter Property="Foreground" Value="Transparent"/>
-                <Setter Property="Template">
-                    <Setter.Value>
-                        <ControlTemplate TargetType="Button">
-                            <Border Name="border" 
-                                    BorderThickness="1"
-                                    Padding="4,2" 
-                                    BorderBrush="DarkGray" 
-                                    CornerRadius="3" 
-                                    Background="{TemplateBinding Background}">
-                                <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
-                            </Border>
-
-                            <ControlTemplate.Triggers>
-                                <Trigger Property="IsMouseOver" Value="True">
-                                    <Setter TargetName="border" Property="BorderBrush" Value="Yellow" />
-                                </Trigger>
-                            </ControlTemplate.Triggers>
-                        </ControlTemplate>
-                    </Setter.Value>
-                </Setter>
-        </Style>-->
-
-
-        <!--<ControlTemplate x:Key="CustomGrid" TargetType="ListViewItem">
-
-            <ItemsControl.ItemsPanel>
-                <ItemsPanelTemplate>
-                    <UniformGrid Columns="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                </ItemsPanelTemplate>
-            </ItemsControl.ItemsPanel>
-
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"  />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-
-
-        </ControlTemplate>-->
-
         <Style x:Key="GridBorder" TargetType="{x:Type ListViewItem}">
 
-
-
-            <!--<Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListViewItem">
-                        <Border Name="Border"  BorderBrush="Black" BorderThickness="1" Opacity="0.6" >
-                            <ContentPresenter />
-                        </Border>
-
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>-->
             <Setter Property="BorderThickness" Value="0.5"/>
             <Setter Property="BorderBrush" Value="Black"/>
             <Setter Property="Foreground" Value="Yellow"/>
@@ -119,7 +58,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="DarkGoldenrod"/>
+                    <Setter Property="Background" Value="LightSkyBlue"/>
                     <Setter Property="Opacity" Value="0.7"/>
                 </Trigger>
             </Style.Triggers>
