@@ -33,8 +33,27 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Foreground" Value="LightSkyBlue"/>
-                    <Setter Property="Opacity" Value="0.7"/>
+                    <Trigger.EnterActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Wheat" Duration="0:0:1"></ColorAnimation>
+
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.EnterActions>
+                    <Trigger.ExitActions>
+                        <BeginStoryboard>
+                            <Storyboard>
+                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Transparent" Duration="0:0:1"></ColorAnimation>
+
+                            </Storyboard>
+                        </BeginStoryboard>
+                    </Trigger.ExitActions>
+
+
+                    <!--<Setter Property="Foreground" Value="LightSkyBlue"/>
+                    <Setter Property="Opacity" Value="0.7"/>-->
                 </Trigger>
             </Style.Triggers>
 
@@ -58,7 +77,7 @@
             </Setter>
             <Style.Triggers>
                 <Trigger Property="IsMouseOver" Value="True">
-                    <Setter Property="Background" Value="LightSkyBlue"/>
+                    <Setter Property="Background" Value="Wheat"/>
                     <Setter Property="Opacity" Value="0.7"/>
                 </Trigger>
             </Style.Triggers>

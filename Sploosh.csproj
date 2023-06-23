@@ -8,38 +8,53 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Images\Background.jpg" />
-    <None Remove="Images\BombAvailable.png" />
-    <None Remove="Images\BombUnavailable.png" />
-    <None Remove="Images\BombUnvailable2.png" />
-    <None Remove="Images\Pergament1.png" />
-    <None Remove="Images\SquareHit.png" />
-    <None Remove="Images\SquareMiss.png" />
-    <None Remove="Images\SquareStart.png" />
     <None Remove="Images\SquareStart2.png" />
-    <None Remove="Images\SquareStart3.png" />
-    <None Remove="Images\SquidAlive.png" />
-    <None Remove="Images\SquidDead.png" />
     <None Remove="Images\Title.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <Resource Include="Images\Background.jpg" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Resource Include="Images\BombAvailable.png" />
-    <Resource Include="Images\BombUnavailable.png" />
-    <Resource Include="Images\BombUnvailable2.png" />
-    <Resource Include="Images\Pergament1.png" />
-    <Resource Include="Images\SquareHit.png" />
-    <Resource Include="Images\SquareMiss.png" />
-    <Resource Include="Images\SquareStart.png" />
-    <Resource Include="Images\SquareStart2.png" />
-    <Resource Include="Images\SquareStart3.png" />
-    <Resource Include="Images\SquidAlive.png" />
-    <Resource Include="Images\SquidDead.png" />
-    <Resource Include="Images\Title.png" />
+    <None Update="Highscore.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\BackArrow.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\BombAvailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\BombUnvailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\Pergament1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SquareHit.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SquareMiss.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SquareStart.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SquidAlive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Images\SquidDead.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\BackgroundMusic.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\SquidDead.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\SquidHit.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+    <None Update="Sounds\SquidMiss.mp3">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 
 </Project>

@@ -11,7 +11,7 @@
         WindowStyle="None">
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Pergament1.png" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>
 
         <StackPanel Margin="10" VerticalAlignment="Center">

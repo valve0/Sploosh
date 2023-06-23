@@ -17,25 +17,9 @@
 
     </Window.Resources>
 
-
-
-    <!--<Window.Triggers>
-        <EventTrigger RoutedEvent="">
-            <EventTrigger.Actions>
-                <BeginStoryboard>
-                    <Storyboard BeginTime="0" Duration="Forever">
-                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="(Window.Top)" From="0" To="10" AutoReverse="true" BeginTime="0:0:0" Duration="0:0:0.5" RepeatBehavior="Forever"/>
-                        <DoubleAnimation Storyboard.TargetName="mainWindow" Storyboard.TargetProperty="(Window.Left)" From="0" To="10" AutoReverse="true" BeginTime="0:0:0" Duration="0:0:0.5" RepeatBehavior="Forever"/>
-                    </Storyboard>
-                </BeginStoryboard>
-            </EventTrigger.Actions>
-        </EventTrigger>
-    </Window.Triggers>-->
-
-    <!-- Background Grid -->
     <Grid>
         <Grid.Background>
-            <ImageBrush ImageSource="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\Pergament1.png" Stretch="UniformToFill" />
+            <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>
 
         <!-- LayoutGrid- Settings, Title and Feedback -->

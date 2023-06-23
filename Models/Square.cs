@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HelperClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,7 +11,9 @@ namespace Sploosh.Models
     {
 
 
-        public Uri ImagePath { get; set; } = new Uri( @"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareStart4.png");
+
+
+        public Uri ImagePath { get; set; }
 
         public int ID { get; set; }
 
@@ -22,10 +25,11 @@ namespace Sploosh.Models
 
         public int[] SquarePosition { get; private set; }
 
-        public Square(int[] squarePosition)
+        public Square(int[] squarePosition, Uri imagePath)
         {
             SquarePosition = squarePosition;
             SquidPresent = false;
+            ImagePath = imagePath;
         }
 
         void UpdateAttackStatus()

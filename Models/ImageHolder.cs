@@ -12,9 +12,9 @@ namespace Sploosh.Models
 
         public string Name { get; set; }
 
-        public ImageHolder(string imagePath, string name)
+        public ImageHolder(Uri imagePath, string name)
         {
-            ImagePath = new Uri(imagePath);
+            ImagePath = imagePath;
 
             Name = name;
         }

@@ -3,23 +3,39 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace LeSploosh
+
+namespace HelperClass
 {
-    internal class TextFileRepository
+    internal class FileRepository
     {
 
-        public static string directory =
-            Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,"Sploosh"); // + @"\LeSploosh\Text Files\";
-          
-        //public static string directory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+        //public static string AssemblyDirectory =
+        //    Path.Combine(Directory.GetParent(Directory.GetCurrentDirectory()).Parent.Parent.Parent.FullName,"Sploosh"); // + @"\LeSploosh\Text Files\";
+
+        //public static string AssemblyDirectory = System.IO.Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+        public static string AssemblyDirectory
+        {
+            get
+            {
+                //string codeBase = Assembly.GetExecutingAssembly().CodeBase;
+                //UriBuilder uri = new UriBuilder(codeBase);
+                //string path = Uri.UnescapeDataString(uri.Path);
+                //return System.IO.Path.GetDirectoryName(path);
+                return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+            }
+        }
+
+
 
 
         public static string LoadStringFromFile(string fileName)
         {
-            string path = @$"{directory}\{fileName}";
+            string path = @$"{AssemblyDirectory}\{fileName}";
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -54,7 +70,7 @@ namespace LeSploosh
 
         public static void WriteStringToFile(string fileName, string stringToWrite) 
         {
-            string path = $"{directory}{fileName}";
+            string path = $"{AssemblyDirectory}{fileName}";
 
             //Overwrites all text in file
             File.WriteAllText(path, stringToWrite);

@@ -1,9 +1,12 @@
-﻿using System;
+﻿using HelperClass;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Sploosh.ViewModels
 {
@@ -18,7 +21,10 @@ namespace Sploosh.ViewModels
        public ICommand BackCommand { get; set; }
        public ICommand AboutCommand { get; set; }
 
-       public SettingsViewModel(ISetupGame mainViewModel)
+       //Static image paths
+       public static ImageSource BackgroundImagePath { get; private set; }
+
+        public SettingsViewModel(ISetupGame mainViewModel)
        {
            _mainViewModel = mainViewModel;
 
@@ -28,7 +34,9 @@ namespace Sploosh.ViewModels
            BackCommand = new RelayCommand(CloseSettingsWindow, CanCloseSettingsWindow);
            AboutCommand = new RelayCommand(OpenAboutWindow, CanOpenAboutWindow);
 
-       }
+           BackgroundImagePath = new BitmapImage(new Uri($@"{FileRepository.AssemblyDirectory}\Images\Pergament1.png", UriKind.Relative));
+
+        }
 
         private bool CanOpenAboutWindow(object obj)
         {

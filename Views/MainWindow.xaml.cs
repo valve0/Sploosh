@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -15,6 +16,10 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 using Sploosh.ViewModels;
+using System.IO;
+using HelperClass;
+using Path = System.Windows.Shapes.Path;
+
 
 namespace Sploosh
 {
@@ -29,8 +34,25 @@ namespace Sploosh
         private MediaPlayer missSoundPlayer = new MediaPlayer();
         private MediaPlayer killedSoundPlayer = new MediaPlayer();
 
+
+        private string backgroundMusicPath;
+        private string squidDeadSoundPath;
+        private string squidHitSoundPath;
+        private string squidMissSoundPath;
+
+
         public MainWindow()
-        {
+        { 
+            //Sounds
+            backgroundMusicPath = FileRepository.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
+            squidDeadSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidDead.mp3";
+            squidHitSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidHit.mp3";
+            squidMissSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
+
+
+
+
+
             InitializeComponent();
             mainViewModel = new MainViewModel();
             this.DataContext = mainViewModel;
@@ -38,7 +60,8 @@ namespace Sploosh
             mainViewModel.AttackEvent += AttackMethod;
             mainViewModel.SquidKilledEvent += SquidKilledMethod;
 
-            backgroundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\pirateship.mp3", UriKind.Relative));
+
+            backgroundPlayer.Open(new Uri(backgroundMusicPath, UriKind.Relative));
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
             
@@ -49,7 +72,7 @@ namespace Sploosh
 
         private void SquidKilledMethod()
         {
-            killedSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\SquidDead.mp3", UriKind.Relative));
+            killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
             killedSoundPlayer.Play();
 
             ScreenShakeAnimation();
@@ -67,7 +90,7 @@ namespace Sploosh
 
             if (hit == true)
             {
-                hitSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\kaboom.mp3", UriKind.Relative));
+                hitSoundPlayer.Open(new Uri(squidHitSoundPath, UriKind.Relative));
                 hitSoundPlayer.Play();
 
                 ScreenShakeAnimation();
@@ -77,7 +100,7 @@ namespace Sploosh
             {
                 //if(missSoundPlayer.CanPause) //If playing
 
-                missSoundPlayer.Open(new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\sploosh.mp3", UriKind.Relative));
+                missSoundPlayer.Open(new Uri(squidMissSoundPath, UriKind.Relative));
                 missSoundPlayer.Play();
             }
 
