@@ -36,8 +36,6 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-
-            <!--<Image x:Name="img" Grid.Column="1" Source="C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\TitleAsciiWhite.png" HorizontalAlignment="Center"  VerticalAlignment="Center"  Margin="0 0 0 0"  />-->
             <Label Grid.Column="1" FontSize="70" Content="Sploosh" VerticalAlignment="Center" HorizontalAlignment="Center"/>
             <Label Grid.Column="1" Grid.Row="2" Content="{Binding feedback}"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>

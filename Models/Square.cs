@@ -50,34 +50,6 @@ namespace Sploosh.Models
         }
 
 
-        //public bool AttackSquare() //returns true if squid killed, false if not
-        //{
-
-        //    if (SquidPresent == false)
-        //    {
-        //        AttackStatus = false;
-        //        ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareMiss.png");
-
-
-        //    }
-        //    else
-        //    {
-        //        AttackStatus = false;
-        //        ImagePath = new Uri(@"C:\Users\tommy\Documents\Visual Studio 2022\WPF\Sploosh\Images\SquareHit.png");
-
-        //        if (AttackSquid())
-        //        {
-        //            //Squid killed, update the squid remaining array
-        //            return true;
-        //        }
-        //    }
-
-        //    return false;
-
-        //}
-
-
-
         public bool AttackSquid()
         {
             return Squid.Attack();
