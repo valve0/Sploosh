@@ -10,33 +10,26 @@ namespace Sploosh.Models
     public class Square
     {
 
-
-
-
-        public Uri ImagePath { get; set; }
-
-        public int ID { get; set; }
-
-        public bool SquidPresent { get; set; }
-
-        public bool AttackStatus { get; set; } = true;
-
-        public Squid Squid { get; private set; }
-
-        public int[] SquarePosition { get; private set; }
-
         public Square(int[] squarePosition, Uri imagePath)
         {
             SquarePosition = squarePosition;
             SquidPresent = false;
             ImagePath = imagePath;
+            AttackStatus = true;
         }
 
-        void UpdateAttackStatus()
-        {
-            AttackStatus = false;
+        public Uri ImagePath { get; set; }
 
-        }
+        public int ID { get; private set; }
+
+        public bool SquidPresent { get; private set; }
+
+        public bool AttackStatus { get; set; }
+
+        public Squid Squid { get; private set; }
+
+        public int[] SquarePosition { get; private set; }
+
 
         public void SetSquid(Squid squid)
         {
@@ -46,9 +39,7 @@ namespace Sploosh.Models
 
             this.Squid.AddSquidPosition(this.SquarePosition);
 
-
         }
-
 
         public bool AttackSquid()
         {

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Sploosh.Models
 {
-    class ImageHolder
+    public class ImageHolder
     {
         public Uri ImagePath { get; set; }
 

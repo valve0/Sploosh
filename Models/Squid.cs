@@ -16,9 +16,9 @@ namespace Sploosh.Models
         private List<int[]> squidPositions;
 
 
-        public Squid(int size, int id)
+        public Squid(int Size, int id)
         {
-            Size = size;
+            Size = Size;
             Id = id;
             hitCounter = 0;
             squidPositions = new List<int[]>();

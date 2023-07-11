@@ -3,21 +3,18 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:uc="clr-namespace:Sploosh.Views"
-        xmlns:local="clr-namespace:Sploosh" xmlns:viewmodels="clr-namespace:Sploosh.ViewModels" d:DataContext="{d:DesignInstance Type=viewmodels:MainViewModel}"
+        xmlns:vm="clr-namespace:Sploosh.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
-        ResizeMode="NoResize"
+        ReSizeMode="NoReSize"
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
-
-
-
+        <vm:MainWindowViewModel x:Key="vm"/>
     </Window.Resources>
 
-    <Grid>
+    <Grid DataContext="{StaticResource vm}">
         <Grid.Background>
             <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>
@@ -36,18 +33,33 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <Label Grid.Column="1" FontSize="70" Content="Sploosh" VerticalAlignment="Center" HorizontalAlignment="Center"/>
-            <Label Grid.Column="1" Grid.Row="2" Content="{Binding feedback}"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+            <Label Grid.Column="1"
+                   FontSize="70"
+                   Content="Sploosh"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"/>
+            
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Content="{Binding feedback}"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"/>
 
-
-            <Button x:Name="Settings" Grid.Row="0" Grid.Column="2" VerticalAlignment="Top" 
-                    HorizontalAlignment="Right" Height="50" Width="100" Margin="10"
-                    Content="Settings" Click="ShowSettingsWindow" Command="{ Binding ShowSettingsWindowCommand}"/>
+            <Button x:Name="Settings"
+                    Grid.Row="0"
+                    Grid.Column="2"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="Right"
+                    Height="50" Width="100"
+                    Margin="10"
+                    Content="Settings"
+                    Command="{Binding ShowSettingsWindowCommand}"/>
 
 
             <!-- Bomb Grid -->
-            <Grid Grid.Row="1" Grid.Column="0" ShowGridLines="False">
+            <Grid Grid.Row="1"
+                  Grid.Column="0"
+                  ShowGridLines="False">
 
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -57,30 +69,32 @@
                     <RowDefinition Height="auto"/>
                     <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
-
-
-
-               
-                    <StackPanel Grid.Row="0" Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+         
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
 
                         <Label Content="Shot Counter "
                                VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Margin="10"/>
+                               HorizontalAlignment="Center"
+                               Margin="10"/>
 
                         <Label  Content="{Binding ShotCounter}"
                                 VerticalAlignment="Center"
-                                   HorizontalAlignment="Center"
-                                   Margin="10"/>
-
+                                HorizontalAlignment="Center"
+                                Margin="10"/>
 
                     </StackPanel>
 
 
                 <Viewbox Grid.Row="1" Stretch="Fill" >
-                    
-                    <ListView BorderBrush="Transparent"  ItemsSource="{Binding BombImages}" HorizontalAlignment="Stretch"
-                              VerticalAlignment="Stretch" Background="Transparent">
+
+                    <ListView BorderBrush="Transparent"
+                              ItemsSource="{Binding BombImages}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Background="Transparent">
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
@@ -97,26 +111,30 @@
 
                         <ItemsControl.ItemsPanel>
                             <ItemsPanelTemplate>
-                                <UniformGrid Columns="3" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                                <UniformGrid Columns="3"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
                             </ItemsPanelTemplate>
                         </ItemsControl.ItemsPanel>
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill" />
+                                <Image Source="{Binding ImagePath}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Stretch="Fill" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
-
-                        
 
                     </ListView>
 
                 </Viewbox>
 
-
             </Grid>
 
             <!-- HighScore and Squids left grid -->
-            <Grid Grid.Row="1" Grid.Column="3" ShowGridLines="False">
+            <Grid Grid.Row="1"
+                  Grid.Column="3"
+                  ShowGridLines="False">
 
 
                 <Grid.RowDefinitions>
@@ -125,7 +143,9 @@
                 </Grid.RowDefinitions>
 
 
-                <StackPanel Orientation="Horizontal" VerticalAlignment="Center" HorizontalAlignment="Center">
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
 
                     <Label Content="Highscore  "
                            VerticalAlignment="Center"
@@ -142,9 +162,18 @@
 
 
 
-                <Viewbox Grid.Row="1" HorizontalAlignment="Left" VerticalAlignment="Top" Height="300"  >
-                    <ListView BorderBrush="Transparent" ItemsSource="{Binding SquidsLeftImages}" HorizontalAlignment="Left"
-                              VerticalAlignment="Top" Background="Transparent" HorizontalContentAlignment="Right" VerticalContentAlignment="Top" >
+                <Viewbox Grid.Row="1"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Height="300">
+                    
+                    <ListView BorderBrush="Transparent"
+                              ItemsSource="{Binding SquidsLeftImages}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Background="Transparent"
+                              HorizontalContentAlignment="Right"
+                              VerticalContentAlignment="Top" >
 
                         <ListView.ItemContainerStyle>
                             <Style TargetType="{x:Type ListViewItem}">
@@ -162,7 +191,10 @@
 
                         <ListView.ItemTemplate>
                             <DataTemplate>
-                                <Image Source="{Binding ImagePath}" Height="25" Width="25" VerticalAlignment="Top" HorizontalAlignment="Left" />
+                                <Image Source="{Binding ImagePath}"
+                                       Height="25" Width="25"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Left" />
                             </DataTemplate>
                         </ListView.ItemTemplate>
                     </ListView>
@@ -170,26 +202,39 @@
 
             </Grid>
 
-            <Border Grid.Row="1" Grid.Column="1" BorderBrush="Black" BorderThickness="1"  >
+            <Border Grid.Row="1"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1"  >
 
                 <!-- Main Squid Grid -->
-            <ListView Grid.Row="1" Grid.Column="1"  ItemsSource="{Binding ConvertedSquares}"
-                      ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Disabled"
-                      HorizontalAlignment="Left" VerticalAlignment="Top" SelectedIndex="{Binding SelectedIndex}"
-                      ItemContainerStyle="{StaticResource GridBorder}"  Style="{StaticResource ListViewStyle}">
+                <ListView Grid.Row="1"
+                          Grid.Column="1"
+                          ItemsSource="{Binding OneDSquares}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          SelectedIndex="{Binding SelectedIndex}"
+                          ItemContainerStyle="{StaticResource GridBorder}"
+                          Style="{StaticResource ListViewStyle}">
 
                 <ItemsControl.ItemsPanel>
                     <ItemsPanelTemplate>
-                        <UniformGrid Columns="8" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                        <UniformGrid Columns="8"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
                     </ItemsPanelTemplate>
                 </ItemsControl.ItemsPanel>
 
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <Image Source="{Binding ImagePath}" HorizontalAlignment="Center" VerticalAlignment="Center" Stretch="Fill"  />
+                        <Image Source="{Binding ImagePath}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Stretch="Fill"  />
                     </DataTemplate>
                 </ListView.ItemTemplate>
-
 
             </ListView>
             </Border>
@@ -197,4 +242,5 @@
         </Grid>
 
     </Grid>
+    
 </Window>

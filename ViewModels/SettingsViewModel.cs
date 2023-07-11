@@ -1,9 +1,5 @@
-﻿using HelperClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Sploosh.Models;
+using System.ComponentModel;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -13,29 +9,48 @@ namespace Sploosh.ViewModels
     class SettingsViewModel
     {
         // Help from https://stackoverflow.com/questions/44829097/what-is-the-mvvm-way-to-call-wpf-command-from-another-viewmodel
-        private ISetupGame _mainViewModel;
+       private MainWindowViewModel _mainWindowViewModel;
 
-        public ICommand QuitCommand { get; set; }
-       public ICommand RestartCommand { get; set; }
-       public ICommand HelpCommand { get; set; }
-       public ICommand BackCommand { get; set; }
-       public ICommand AboutCommand { get; set; }
+        // Parameterless ctor to allow for testing of bindings in design mode
+        public SettingsViewModel()
+        {
+            if (DesignerProperties.GetIsInDesignMode(new System.Windows.DependencyObject()))
+            {
+                ArrowImagePath = new BitmapImage(GameConstants.ArrowImage);
+                BackgroundImagePath = new BitmapImage(GameConstants.BackgroundImage);
+            }
+        }
 
-       //Static image paths
-       public static ImageSource BackgroundImagePath { get; private set; }
-
-        public SettingsViewModel(ISetupGame mainViewModel)
+        public SettingsViewModel(MainWindowViewModel mainWindowViewModel)
        {
-           _mainViewModel = mainViewModel;
+           _mainWindowViewModel = mainWindowViewModel;
 
            QuitCommand = new RelayCommand(QuitApplication, CanQuitApplication);
            RestartCommand = new RelayCommand(RestartApplication, CanRestartApplication);
            HelpCommand = new RelayCommand(OpenHelpWindow, CanOpenHelpWindow);
-           BackCommand = new RelayCommand(CloseSettingsWindow, CanCloseSettingsWindow);
            AboutCommand = new RelayCommand(OpenAboutWindow, CanOpenAboutWindow);
 
-           BackgroundImagePath = new BitmapImage(new Uri($@"{FileRepository.AssemblyDirectory}\Images\Pergament1.png", UriKind.Relative));
+           BackgroundImagePath = new BitmapImage(GameConstants.BackgroundImage);
+           ArrowImagePath = new BitmapImage(GameConstants.ArrowImage);
+        }
 
+        public delegate void RestartEventAction();
+        public event RestartEventAction? RestartEvent;
+
+        public ICommand QuitCommand { get; set; }
+        public ICommand RestartCommand { get; set; }
+        public ICommand HelpCommand { get; set; }
+        public ICommand AboutCommand { get; set; }
+
+        public static ImageSource BackgroundImagePath { get; private set; }
+        public static ImageSource ArrowImagePath { get; private set; }
+
+        /// <summary>
+        /// Resets the ViewModel Properties to intial values- resetting the game.
+        /// </summary>
+        private void RestartApplication(object obj)
+        {
+            _mainWindowViewModel.RestartGame(_mainWindowViewModel);
         }
 
         private bool CanOpenAboutWindow(object obj)
@@ -44,15 +59,6 @@ namespace Sploosh.ViewModels
         }
 
         private void OpenAboutWindow(object obj)
-        {
-        }
-
-        private bool CanCloseSettingsWindow(object obj)
-        {
-            return true;
-        }
-
-        private void CloseSettingsWindow(object obj)
         {
         }
 
@@ -68,11 +74,6 @@ namespace Sploosh.ViewModels
         private bool CanRestartApplication(object obj)
         {
             return true;
-        }
-
-        private void RestartApplication(object obj)
-        {
-            _mainViewModel.SetupGame();
         }
 
         private bool CanQuitApplication(object obj)

@@ -1,34 +1,16 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
-using Microsoft.VisualBasic;
 using Sploosh.ViewModels;
-using System.IO;
-using HelperClass;
-using Path = System.Windows.Shapes.Path;
+
 
 
 namespace Sploosh
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
     public partial class MainWindow : Window
     {
-        private MainViewModel mainViewModel;
+        private MainWindowViewModel mainViewModel;
         private MediaPlayer backgroundPlayer = new MediaPlayer();
         private MediaPlayer hitSoundPlayer = new MediaPlayer();
         private MediaPlayer missSoundPlayer = new MediaPlayer();
@@ -44,32 +26,28 @@ namespace Sploosh
         public MainWindow()
         { 
             //Sounds
-            backgroundMusicPath = FileRepository.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
-            squidDeadSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidDead.mp3";
-            squidHitSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidHit.mp3";
-            squidMissSoundPath = FileRepository.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
-
-
-
-
+            backgroundMusicPath = GameConstants.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
+            squidDeadSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidDead.mp3";
+            squidHitSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidHit.mp3";
+            squidMissSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
 
             InitializeComponent();
-            mainViewModel = new MainViewModel();
+
+            mainViewModel = new MainWindowViewModel();
             this.DataContext = mainViewModel;
-            //DataContextChanged += ViewModelSaidDoSomething;
+
             mainViewModel.AttackEvent += AttackMethod;
             mainViewModel.SquidKilledEvent += SquidKilledMethod;
-
 
             backgroundPlayer.Open(new Uri(backgroundMusicPath, UriKind.Relative));
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
             
-
-
-
         }
 
+        /// <summary>
+        /// When the Squid Killed event occurs this plays the appropriate sound effect
+        /// </summary>
         private void SquidKilledMethod()
         {
             killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
@@ -78,15 +56,22 @@ namespace Sploosh
             ScreenShakeAnimation();
         }
 
+        /// <summary>
+        /// This plasy the background music on loop
+        /// </summary>
         private void BackgroundMusicEnded(object sender, EventArgs e)
         {
             backgroundPlayer.Position = TimeSpan.Zero;
             backgroundPlayer.Play();
         }
 
+
+        /// <summary>
+        /// When the attck mehgtod is called this runs, this plasy the appropriate 
+        /// sound effect for a hit/miss
+        /// </summary>
         private void AttackMethod(bool hit)
         {
-
 
             if (hit == true)
             {
@@ -104,10 +89,11 @@ namespace Sploosh
                 missSoundPlayer.Play();
             }
 
-
-
         }
 
+        /// <summary>
+        /// This performs an anmination on the mian window- shaking it
+        /// </summary>
         private void ScreenShakeAnimation()
         {
             
@@ -119,20 +105,5 @@ namespace Sploosh
             leftAnimation.AutoReverse = true;
             mainWindow.BeginAnimation(Window.LeftProperty, leftAnimation);
         }
-
-        private void ListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
-
-
-        private void ShowSettingsWindow(object sender, RoutedEventArgs e)
-        {
-            
-                SettingsWindow settingsWindow = new SettingsWindow(mainViewModel);
-                settingsWindow.ShowDialog();
-        }
-
-
     }
 }
