@@ -22,7 +22,6 @@ namespace Sploosh.ViewModels
 
         public static readonly (string name, int squidSize, int noSquid)[] SquidTuples = new (string name, int squidSize, int noSquid)[]
         {
-            ("small", 1, 0),
             ("medium", 2, 1),
             ("large", 3, 1),
             ("giant", 4, 1)

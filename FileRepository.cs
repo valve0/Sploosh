@@ -56,10 +56,11 @@ namespace HelperClass
         /// </summary>
         public static void WriteStringToFile(string fileName, string stringToWrite) 
         {
-            string path = $"{GameConstants.AssemblyDirectory}{fileName}";
+            string path = @$"{GameConstants.AssemblyDirectory}\{fileName}";
 
             //Overwrites all text in file
             File.WriteAllText(path, stringToWrite);
+
         }
 
 

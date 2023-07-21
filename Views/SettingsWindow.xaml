@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Sploosh.ViewModels"
         xmlns:local="clr-namespace:Sploosh"
         mc:Ignorable="d"
-        ReSizeMode="NoReSize"
+        ResizeMode="NoReSize"
         WindowStartupLocation="CenterOwner"
         Title="SettingsWindow" Height="300" Width="200"
         WindowStyle="None">

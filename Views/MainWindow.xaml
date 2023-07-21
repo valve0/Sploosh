@@ -6,15 +6,16 @@
         xmlns:vm="clr-namespace:Sploosh.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
-        ReSizeMode="NoReSize"
+        ResizeMode="NoReSize"
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
     <Window.Resources>
         <vm:MainWindowViewModel x:Key="vm"/>
+        <!--<ViewModels:MainWindowViewModel  x:Key="DesignViewModel"/>-->
     </Window.Resources>
 
-    <Grid DataContext="{StaticResource vm}">
+    <Grid d:DataContext="{Binding Source={StaticResource vm}}">
         <Grid.Background>
             <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>

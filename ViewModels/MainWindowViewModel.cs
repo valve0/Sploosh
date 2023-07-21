@@ -144,6 +144,8 @@ namespace Sploosh.ViewModels
             GameState.SetupGame(vm);
         }
 
+
+
         private bool CanShowNewContactWindow(object obj)
         {
             return true;
@@ -192,6 +194,7 @@ namespace Sploosh.ViewModels
                 }
                 else
                     AttackEvent?.Invoke(true); //Hit
+                    
 
             }
             else //If attackable but no squid
@@ -200,6 +203,7 @@ namespace Sploosh.ViewModels
                 OneDSquares[selectedIndex].ImagePath = GameConstants.SquareMissPath;
 
                 AttackEvent?.Invoke(false); //Miss
+
             }
 
             //Update selected square and change it's attack status so it cannot be attacked again

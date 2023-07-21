@@ -8,14 +8,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Highscore.txt" />
     <None Remove="Images\SquareStart2.png" />
     <None Remove="Images\Title.png" />
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="Highscore.txt">
+    <Content Include="Highscore.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
     <None Update="Images\BackArrow.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

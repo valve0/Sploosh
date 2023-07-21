@@ -31,7 +31,7 @@ namespace Sploosh
             squidHitSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidHit.mp3";
             squidMissSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
 
-            InitializeComponent();
+            
 
             mainViewModel = new MainWindowViewModel();
             this.DataContext = mainViewModel;
@@ -42,18 +42,8 @@ namespace Sploosh
             backgroundPlayer.Open(new Uri(backgroundMusicPath, UriKind.Relative));
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
-            
-        }
 
-        /// <summary>
-        /// When the Squid Killed event occurs this plays the appropriate sound effect
-        /// </summary>
-        private void SquidKilledMethod()
-        {
-            killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
-            killedSoundPlayer.Play();
-
-            ScreenShakeAnimation();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -67,7 +57,7 @@ namespace Sploosh
 
 
         /// <summary>
-        /// When the attck mehgtod is called this runs, this plasy the appropriate 
+        /// When the attack method is called this plays the appropriate 
         /// sound effect for a hit/miss
         /// </summary>
         private void AttackMethod(bool hit)
@@ -89,6 +79,17 @@ namespace Sploosh
                 missSoundPlayer.Play();
             }
 
+        }
+
+        /// <summary>
+        /// When the Squid Killed event occurs this plays the appropriate sound effect
+        /// </summary>
+        private void SquidKilledMethod()
+        {
+            killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
+            killedSoundPlayer.Play();
+
+            ScreenShakeAnimation();
         }
 
         /// <summary>

@@ -92,18 +92,22 @@ namespace Sploosh.Models
 
         /// <summary>
         /// This method works out where to put each squid. It loops through
-        /// the length of each squid putting the selected location for each part of the squid into a temporary list.
+        /// the length of each squid putting the selected location for each part
+        /// of the squid into a temporary 2D list "twoDSquares".
         /// 
         /// </summary>
         private static void PlaceSquids()
         {
             //Create a temporary list of 
             List<Squid> squids = new List<Squid>();
+            int squidID = 0;
 
 
             //Loop through array of tuples
             foreach (var squidTuple in GameConstants.SquidTuples)
             {
+                squidID++;
+
                 //Loop through the number of squid for a given Size
                 for (int squidNo = 1; squidNo < squidTuple.noSquid + 1; squidNo++)
                 {
@@ -139,7 +143,7 @@ namespace Sploosh.Models
                             else
                             {
                                 // Try and place the subsequent part of squid
-                                squidPartPlaced = PlaceSubsequentSquidPart(squidTuple, squidNo, squidPart, direction, ref squidPartPositions);
+                                squidPartPlaced = PlaceSubsequentSquidPart(squidTuple, squidID, squidPart, direction, ref squidPartPositions);
 
                                 if (squidPartPlaced == false)
                                     break; //Redo squid place loop
@@ -210,6 +214,7 @@ namespace Sploosh.Models
                 //check to see if at end of loop and therefore last part of squid placed successfully
                 if (squidPart + 1 == squidTuple.squidSize)
                 {
+                    //int tempSize = ;
 
                     //Instantiate squid object add to list of squids
                     listOfSquids.Add(new Squid(squidTuple.squidSize, squidNo));
