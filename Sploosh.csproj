@@ -26,6 +26,9 @@
     <None Update="Images\BombAvailable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
+    <None Update="Images\BombUnavailable.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Update="Images\BombUnvailable.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>

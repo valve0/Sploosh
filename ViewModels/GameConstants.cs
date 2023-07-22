@@ -32,8 +32,8 @@ namespace Sploosh.ViewModels
         public static readonly Uri SquareMissPath = new Uri($@"{AssemblyDirectory}\Images\SquareMiss.png");
         public static readonly Uri BackgroundImage = new Uri($@"{AssemblyDirectory}\Images\Pergament1.png");
         public static readonly Uri ArrowImage = new Uri($@"{AssemblyDirectory}\Images\BackArrow.png");
-        public static readonly Uri BombAvailablePath = new Uri($@"{AssemblyDirectory}\Images\BombAvailable.png");
-        public static readonly Uri BombUnavailablePath = new Uri($@"{AssemblyDirectory}\Images\BombUnvailable.png");
+        public static readonly Uri BombAvailablePath = new Uri($@"{AssemblyDirectory}\Images\BombAvailable.png"); 
+        public static readonly Uri BombUnavailablePath = new Uri($@"{AssemblyDirectory}\Images\BombUnavailable.png");
         public static readonly Uri SquidAlivePath = new Uri($@"{AssemblyDirectory}\Images\SquidAlive.png");
         public static readonly Uri SquidDeadPath = new Uri($@"{AssemblyDirectory}\Images\SquidDead.png");
     }
