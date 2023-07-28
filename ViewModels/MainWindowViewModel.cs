@@ -23,6 +23,7 @@ namespace Sploosh.ViewModels
         private ObservableCollection<ImageHolder> _bombImages;
         private ObservableCollection<Square> _oneDSquares;
         private ObservableCollection<Squid> _squids;
+        private string _feedback;
 
         public MainWindowViewModel()
         {
@@ -117,6 +118,17 @@ namespace Sploosh.ViewModels
             }
         }
 
+        public string Feedback
+        {
+            get { return _feedback; }
+            set
+            {
+                _feedback = value;
+                OnPropertyChanged();
+            }
+        }
+
+
         public int SquidKillIndex { get; set; }
 
         public int SelectedIndex
@@ -139,12 +151,14 @@ namespace Sploosh.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// When called this resets the application so the user can play the game again
+        /// </summary>
         public void RestartGame(MainWindowViewModel vm)
         {
             GameState.SetupGame(vm);
         }
-
-
 
         private bool CanShowNewContactWindow(object obj)
         {
@@ -189,11 +203,14 @@ namespace Sploosh.ViewModels
 
                     SquidKillIndex++;
 
-                    SquidKilledEvent?.Invoke();
-
+                    SquidKilledEvent?.Invoke(); //Hit- Squid killed
+                    Feedback = "Squid destroyed!";
                 }
                 else
+                {
                     AttackEvent?.Invoke(true); //Hit
+                    Feedback = "Hit!";
+                }
                     
 
             }
@@ -203,6 +220,7 @@ namespace Sploosh.ViewModels
                 OneDSquares[selectedIndex].ImagePath = GameConstants.SquareMissPath;
 
                 AttackEvent?.Invoke(false); //Miss
+                Feedback = "Miss!";
 
             }
 

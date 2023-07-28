@@ -34,6 +34,15 @@
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
+            <ToggleButton 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="left"
+                    Margin="10"
+                    Content="Turn off Sound Effects"
+                    Command="{Binding ShowSettingsWindowCommand}"/>
+
             <Label Grid.Column="1"
                    FontSize="70"
                    Content="Sploosh"
@@ -42,7 +51,7 @@
             
             <Label Grid.Column="1"
                    Grid.Row="2"
-                   Content="{Binding feedback}"
+                   Content="{Binding Feedback}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
 

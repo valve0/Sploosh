@@ -23,6 +23,7 @@ namespace Sploosh.Models
             //Reset counters
             viewModel.SquidKillIndex = 0;
             viewModel.ShotCounter = 0;
+            viewModel.Feedback = "Test string";
 
             //Set highscore
             viewModel.Highscore = int.Parse(FileRepository.LoadStringFromFile(GameConstants.HighscoreFileName).Replace("\r\n", string.Empty));
