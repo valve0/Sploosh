@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Sploosh.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
-        
+        ResizeMode="NoReSize"
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
