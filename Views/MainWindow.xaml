@@ -6,7 +6,7 @@
         xmlns:vm="clr-namespace:Sploosh.ViewModels"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
-        ResizeMode="NoReSize"
+        
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
@@ -33,6 +33,15 @@
                 <RowDefinition Height="800"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
+
+            <ToggleButton 
+                    Grid.Row="0"
+                    Grid.Column="0"
+                    VerticalAlignment="Top"
+                    HorizontalAlignment="left"
+                    Margin="10"
+                    Content="Turn off Sound Effects"
+                    Command="{Binding ShowSettingsWindowCommand}"/>
 
             <Label Grid.Column="1"
                    FontSize="70"

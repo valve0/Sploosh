@@ -151,12 +151,14 @@ namespace Sploosh.ViewModels
             }
         }
 
+
+        /// <summary>
+        /// When called this resets the application so the user can play the game again
+        /// </summary>
         public void RestartGame(MainWindowViewModel vm)
         {
             GameState.SetupGame(vm);
         }
-
-
 
         private bool CanShowNewContactWindow(object obj)
         {
