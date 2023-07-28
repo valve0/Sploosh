@@ -42,7 +42,7 @@
             
             <Label Grid.Column="1"
                    Grid.Row="2"
-                   Content="{Binding feedback}"
+                   Content="{Binding Feedback}"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
 
