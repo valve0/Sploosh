@@ -13,7 +13,7 @@
             <Setter Property="FontFamily" Value="Blackadder ITC"/>
             <Setter Property="Foreground" Value="Black"/>
             <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="FontSize" Value="25"/>
+            <Setter Property="FontSize" Value="30"/>
         </Style>
 
         <Style TargetType="Button">

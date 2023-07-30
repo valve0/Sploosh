@@ -30,6 +30,9 @@ namespace Sploosh.ViewModels
 
             GameState.SetupGame(this);
 
+            //Remove test string
+            Feedback = "";
+
             BackgroundImagePath = new BitmapImage(GameConstants.BackgroundImage);
 
             ShowSettingsWindowCommand = new RelayCommand(ShowSettingsWindow, CanShowNewContactWindow);

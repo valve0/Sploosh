@@ -11,10 +11,10 @@ namespace Sploosh
     public partial class MainWindow : Window
     {
         private MainWindowViewModel mainViewModel;
-        private MediaPlayer backgroundPlayer = new MediaPlayer();
-        private MediaPlayer hitSoundPlayer = new MediaPlayer();
-        private MediaPlayer missSoundPlayer = new MediaPlayer();
-        private MediaPlayer killedSoundPlayer = new MediaPlayer();
+        private MediaPlayer backgroundPlayer = new();
+        private MediaPlayer hitSoundPlayer = new();
+        private MediaPlayer missSoundPlayer = new();
+        private MediaPlayer killedSoundPlayer = new();
 
 
         private string backgroundMusicPath;
