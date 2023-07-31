@@ -1,5 +1,6 @@
 ﻿using HelperClass;
-using Sploosh.ViewModels;
+using Sploosh.Model;
+using Sploosh.ViewModel;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -18,7 +19,7 @@ namespace Sploosh.Models
         /// <summary>
         /// Resets the Properties of the MainWindowViewModel raeady for a new game
         /// </summary>
-        public static void SetupGame(MainWindowViewModel viewModel)
+        public static void SetupGame(GameViewModel viewModel)
         {
             //Reset counters
             viewModel.SquidKillIndex = 0;

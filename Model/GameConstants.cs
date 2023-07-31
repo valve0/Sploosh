@@ -7,7 +7,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Sploosh.ViewModels
+namespace Sploosh.Model
 {
     public class GameConstants
     {

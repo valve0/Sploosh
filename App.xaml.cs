@@ -1,11 +1,19 @@
-﻿using System.Windows;
+﻿using Sploosh.View;
+using Sploosh.ViewModel;
+using System.Windows;
 
 namespace Sploosh
 {
-    /// <summary>
-    /// Interaction logic for App.xaml
-    /// </summary>
     public partial class App : Application
     {
+        protected override void OnStartup(StartupEventArgs e)
+        {
+            base.OnStartup(e);
+
+            var mainWindow = new MainWindow(new MainViewModel(new GameViewModel(),
+                new SettingsViewModel()));
+            mainWindow.Show();
+
+        }
     }
 }
