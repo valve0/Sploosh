@@ -2,9 +2,10 @@
 
 namespace Sploosh.View
 {
-    public partial class QuitView : UserControl
+
+    public partial class SoundView : UserControl
     {
-        public QuitView()
+        public SoundView()
         {
             InitializeComponent();
         }

@@ -12,10 +12,7 @@
        
     </UserControl.Resources>
 
-    <Grid d:DataContext="{Binding Source={StaticResource vm}}">
-        <Grid.Background>
-            <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
-        </Grid.Background>
+    <Grid>
 
         <!-- LayoutGrid- Settings, Title and Feedback -->
         <Grid ShowGridLines="False">
@@ -26,25 +23,11 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                <RowDefinition Height="auto"/>
+                
                 <RowDefinition Height="800"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
-            <ToggleButton 
-                    Grid.Row="0"
-                    Grid.Column="0"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="left"
-                    Margin="10"
-                    Content="Turn off Sound Effects"
-                    Command="{Binding ShowSettingsWindowCommand}"/>
-
-            <Label Grid.Column="1"
-                   FontSize="70"
-                   Content="Sploosh"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"/>
             
             <Label Grid.Column="1"
                    Grid.Row="2"
@@ -52,19 +35,10 @@
                    HorizontalAlignment="Center"
                    VerticalAlignment="Center"/>
 
-            <Button x:Name="Settings"
-                    Grid.Row="0"
-                    Grid.Column="2"
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Right"
-                    Height="50" Width="100"
-                    Margin="10"
-                    Content="Settings"
-                    Command="{Binding ShowSettingsWindowCommand}"/>
 
 
             <!-- Bomb Grid -->
-            <Grid Grid.Row="1"
+            <Grid Grid.Row="0"
                   Grid.Column="0"
                   ShowGridLines="False">
 
@@ -139,7 +113,7 @@
             </Grid>
 
             <!-- HighScore and Squids left grid -->
-            <Grid Grid.Row="1"
+            <Grid Grid.Row="0"
                   Grid.Column="3"
                   ShowGridLines="False">
 
@@ -209,13 +183,13 @@
 
             </Grid>
 
-            <Border Grid.Row="1"
+            <Border Grid.Row="0"
                     Grid.Column="1"
                     BorderBrush="Black"
                     BorderThickness="1"  >
 
                 <!-- Main Squid Grid -->
-                <ListView Grid.Row="1"
+                <ListView Grid.Row="0"
                           Grid.Column="1"
                           ItemsSource="{Binding OneDSquares}"
                           ScrollViewer.HorizontalScrollBarVisibility="Disabled"

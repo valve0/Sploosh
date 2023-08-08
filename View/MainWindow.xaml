@@ -11,17 +11,34 @@
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
+
     <Window.Resources>
+
+        <Image x:Key="HoverImage" Source="/Images/Motif.png" Visibility="Collapsed"/>
+
         <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
             <view:GameView/>
         </DataTemplate>
         <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
             <view:SettingsView/>
         </DataTemplate>
+
+
+        <Storyboard x:Key="MoveLeftAnimation">
+            <DoubleAnimation
+                Storyboard.TargetProperty="(Window.Left)"
+                Duration="0:0:0.15"
+                To="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}">
+                <DoubleAnimation.AutoReverse>
+                    True
+                </DoubleAnimation.AutoReverse>
+            </DoubleAnimation>
+        </Storyboard>
+
     </Window.Resources>
 
-    <Grid d:DataContext="{Binding Source={StaticResource vm}}">
-        
+    <Grid>
+
         <Grid.Background>
             <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>
@@ -38,16 +55,14 @@
                    VerticalAlignment="Center"
                    HorizontalAlignment="Center"
         />
+        <Button 
+                Command="{Binding ShowSettingsWindowCommand}"
+                CommandParameter="{Binding SettingsViewModel}"
+                Content="Settings"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"/>
 
-
-        <Button x:Name="Settings"                           
-                    VerticalAlignment="Top"
-                    HorizontalAlignment="Right"
-                    Height="50" Width="100"
-                    Margin="10"
-                    Content="Settings"
-                    Command="{Binding ShowSettingsWindowCommand}"
-         />
+        <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
 
     </Grid>
 

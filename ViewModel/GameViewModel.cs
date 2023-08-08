@@ -1,35 +1,27 @@
 ﻿using HelperClass;
 using Sploosh.Model;
 using Sploosh.Models;
-using Sploosh.View;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.ComponentModel;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Windows;
-using System.Windows.Input;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-
 
 namespace Sploosh.ViewModel
 {
     public class GameViewModel : ViewModelBase
     {
-        private MainWindow _window;
-
         private int _selectedIndex = -1;
-        private int _shotCounter;
         private int _numberOfSquid;
+        private int _squidKillIndex;
+
+        private int _shotCounter;
         private int _highScore;
+        private string _feedback;
         private ObservableCollection<ImageHolder> _squidsLeftImages;
         private ObservableCollection<ImageHolder> _bombImages;
         private ObservableCollection<Square> _oneDSquares;
-        private ObservableCollection<Squid> _squids;
-        private string _feedback;
+
 
         private MediaPlayer backgroundPlayer = new();
         private MediaPlayer hitSoundPlayer = new();
@@ -42,49 +34,49 @@ namespace Sploosh.ViewModel
         private string squidHitSoundPath;
         private string squidMissSoundPath;
 
+
         public GameViewModel()
         {
-            //_window = window;
-            GameState.SetupGame(this);
 
-            //Remove test string
-            Feedback = "";
-
-            BackgroundImagePath = new BitmapImage(GameConstants.BackgroundImage);
+            SetupGame();
 
             //Sounds
-            backgroundMusicPath = GameConstants.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
-            squidDeadSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidDead.mp3";
-            squidHitSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidHit.mp3";
-            squidMissSoundPath = GameConstants.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
+            backgroundMusicPath = GameModel.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
+            squidDeadSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidDead.mp3";
+            squidHitSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidHit.mp3";
+            squidMissSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
 
 
             backgroundPlayer.Open(new Uri(backgroundMusicPath, UriKind.Relative));
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
-            //_window = window;
+
         }
 
-        //public event PropertyChangedEventHandler? PropertyChanged = delegate { };
-
-        public delegate void AttackEventAction(bool hit);
-        public event AttackEventAction? AttackEvent;
-
-        public delegate void SquidKilledEventAction();
-        public event SquidKilledEventAction? SquidKilledEvent;
-
-
-        public ImageSource BackgroundImagePath { get; private set; }
-
-        public int NumberOfSquid
+        private void SetupGame()
         {
-            get { return _numberOfSquid; }
-            set
-            {
-                _numberOfSquid = value;
-                RaisePropertyChanged();
-            }
+
+
+            
+            //Reset counters
+            _squidKillIndex = 0;
+            _numberOfSquid = 3;
+
+            ShotCounter = 0;
+            Feedback = "";
+           
+
+            Highscore = GameModel.GetHighscore();
+            BombImages = GameModel.GetBombImages();
+            OneDSquares = GameModel.GetOneDSquares();
+            SquidsLeftImages = GameModel.GetSquidImages();
+
         }
+
+
+        public delegate void AttackEventAction();
+        public event AttackEventAction? ScreenShakeAnimationEvent;
+
 
         public int ShotCounter
         {
@@ -116,15 +108,6 @@ namespace Sploosh.ViewModel
             }
         }
 
-        public ObservableCollection<Squid> Squids
-        {
-            get { return _squids; }
-            set
-            {
-                _squids = value;
-                RaisePropertyChanged();
-            }
-        }
 
         public ObservableCollection<ImageHolder> BombImages
         {
@@ -157,8 +140,6 @@ namespace Sploosh.ViewModel
         }
 
 
-        public int SquidKillIndex { get; set; }
-
         public int SelectedIndex
         {
             get => _selectedIndex;
@@ -183,9 +164,9 @@ namespace Sploosh.ViewModel
         /// <summary>
         /// When called this resets the application so the user can play the game again
         /// </summary>
-        public void RestartGame(GameViewModel vm)
+        public void RestartGame()
         {
-            GameState.SetupGame(vm);
+            SetupGame();
         }
 
 
@@ -211,15 +192,15 @@ namespace Sploosh.ViewModel
             if (OneDSquares[selectedIndex].SquidPresent == true)
             {
 
-                OneDSquares[selectedIndex].ImagePath = GameConstants.SquareHitPath;
+                OneDSquares[selectedIndex].ImagePath = GameModel.SquareHitPath;
 
                 if (OneDSquares[selectedIndex].AttackSquid())
                 {
                     //Returned true which means a squid killed
 
-                    SquidsLeftImages[SquidKillIndex].ImagePath = GameConstants.SquidDeadPath;
+                    SquidsLeftImages[_squidKillIndex].ImagePath = GameModel.SquidDeadPath;
 
-                    SquidKillIndex++;
+                    _squidKillIndex++;
 
                     SquidKilledMethod(); //Hit- Squid killed
                     Feedback = "Squid destroyed!";
@@ -235,7 +216,7 @@ namespace Sploosh.ViewModel
             else //If attackable but no squid
             {
 
-                OneDSquares[selectedIndex].ImagePath = GameConstants.SquareMissPath;
+                OneDSquares[selectedIndex].ImagePath = GameModel.SquareMissPath;
 
                 AttackMethod(false); //Miss
                 Feedback = "Miss!";
@@ -246,7 +227,7 @@ namespace Sploosh.ViewModel
             OneDSquares[selectedIndex].AttackStatus = false;
 
             //Change a bomb to unavailable
-            BombImages[ShotCounter].ImagePath = GameConstants.BombUnavailablePath;
+            BombImages[ShotCounter].ImagePath = GameModel.BombUnavailablePath;
             ShotCounter++;
 
             UpdateMainWindow();
@@ -260,17 +241,17 @@ namespace Sploosh.ViewModel
         /// </summary>
         private void CheckForEnd()
         {
-            if (SquidKillIndex == NumberOfSquid)
+            if (_squidKillIndex == _numberOfSquid)
             {
                 MessageBox.Show("You Win");
                 CheckForHighScore();
-                GameState.SetupGame(this);
+                SetupGame();
 
             }
-            else if (ShotCounter == GameConstants.MaxShotCount)
+            else if (ShotCounter == GameModel.MaxShotCount)
             {
                 MessageBox.Show("You Lose");
-                GameState.SetupGame(this);
+                SetupGame();
             }
         }
 
@@ -285,7 +266,7 @@ namespace Sploosh.ViewModel
             {
                 //update highscore property and textfile
                 Highscore = ShotCounter;
-                FileRepository.WriteStringToFile(GameConstants.HighscoreFileName, Highscore.ToString());
+                FileRepository.WriteStringToFile(GameModel.HighscoreFileName, Highscore.ToString());
 
             }
 
@@ -312,14 +293,11 @@ namespace Sploosh.ViewModel
             {
                 hitSoundPlayer.Open(new Uri(squidHitSoundPath, UriKind.Relative));
                 hitSoundPlayer.Play();
-
-                //ScreenShakeAnimation();
+                ScreenShakeAnimationEvent?.Invoke();
 
             }
             else
             {
-                //if(missSoundPlayer.CanPause) //If playing
-
                 missSoundPlayer.Open(new Uri(squidMissSoundPath, UriKind.Relative));
                 missSoundPlayer.Play();
             }
@@ -334,27 +312,7 @@ namespace Sploosh.ViewModel
             killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
             killedSoundPlayer.Play();
 
-            //ScreenShakeAnimation();
         }
-
-
-        //Dont know how to get this to work as will require injection of MainWindow object which itslef needs the GameView model- endless circle
-        
-        ///// <summary>
-        ///// This performs an anmination on the mian window- shaking it
-        ///// </summary>
-        //private void ScreenShakeAnimation()
-        //{
-
-        //    DoubleAnimation leftAnimation = new DoubleAnimation();
-
-        //    leftAnimation.From = _window.Left;
-        //    leftAnimation.To = _window.Left - 30;
-        //    leftAnimation.Duration = TimeSpan.FromSeconds(0.15);
-        //    leftAnimation.AutoReverse = true;
-        //    _window.BeginAnimation(Window.LeftProperty, leftAnimation);
-        //}
-
 
     }
 

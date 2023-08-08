@@ -16,7 +16,7 @@ namespace HelperClass
         /// </summary>
         public static string LoadStringFromFile(string fileName)
         {
-            string path = @$"{GameConstants.AssemblyDirectory}\{fileName}";
+            string path = @$"{GameModel.AssemblyDirectory}\{fileName}";
 
             StringBuilder stringBuilder = new StringBuilder();
 
@@ -54,7 +54,7 @@ namespace HelperClass
         /// </summary>
         public static void WriteStringToFile(string fileName, string stringToWrite) 
         {
-            string path = @$"{GameConstants.AssemblyDirectory}\{fileName}";
+            string path = @$"{GameModel.AssemblyDirectory}\{fileName}";
 
             //Overwrites all text in file
             File.WriteAllText(path, stringToWrite);

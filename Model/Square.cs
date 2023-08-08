@@ -1,9 +1,4 @@
-﻿using HelperClass;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace Sploosh.Models
 {
@@ -26,7 +21,7 @@ namespace Sploosh.Models
 
         public bool AttackStatus { get; set; }
 
-        public Squid Squid { get; private set; }
+        public Squid? Squid { get; private set; }
 
         public int[] SquarePosition { get; private set; }
 
@@ -37,7 +32,7 @@ namespace Sploosh.Models
 
             SquidPresent = true;
 
-            this.Squid.AddSquidPosition(this.SquarePosition);
+            Squid.AddSquidPosition(SquarePosition);
 
         }
 

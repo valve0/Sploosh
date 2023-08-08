@@ -2,9 +2,9 @@
 
 namespace Sploosh.View
 {
-    public partial class BombsControl : UserControl
+    public partial class AboutView : UserControl
     {
-        public BombsControl()
+        public AboutView()
         {
             InitializeComponent();
         }
