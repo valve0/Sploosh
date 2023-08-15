@@ -1,0 +1,59 @@
+﻿<UserControl x:Class="Sploosh.View.SplashView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sploosh.View"
+             mc:Ignorable="d"
+             Loaded="UserControl_Loaded"
+             d:DesignHeight="1000" d:DesignWidth="1400">
+    <UserControl.Resources>
+        <Storyboard x:Key="TranslateStoryboard">
+            <DoubleAnimation
+                Storyboard.TargetName="myLabel"
+                Storyboard.TargetProperty="(UIElement.RenderTransform).(TranslateTransform.Y)"
+                From="1000" To="400" Duration="0:0:3"
+            />
+            <DoubleAnimation
+                Storyboard.TargetName="Title"
+                Storyboard.TargetProperty="Opacity"
+                From="0" To="1" Duration="0:0:5"
+                />
+        </Storyboard>
+
+
+        <Style TargetType="Label" x:Key="WelcomeStyle">
+            <Setter Property="FontSize" Value="90"/>
+            <Setter Property="FontFamily" Value="Blackadder ITC"/>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Canvas>
+            <Label x:Name="myLabel"
+                   Content="Welcome to"
+                   Style="{StaticResource WelcomeStyle}"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center">
+
+                <Label.RenderTransform>
+                    <TranslateTransform X="550" Y="1000"/>
+                </Label.RenderTransform>
+                
+            </Label>
+
+            <Label x:Name="Title"
+                   Content="Sploosh"
+                   Style="{StaticResource WelcomeStyle}">
+                <Label.RenderTransform>
+                    <TranslateTransform X="600" Y="500"/>
+                </Label.RenderTransform>
+            </Label>
+
+        </Canvas>
+
+
+
+    </Grid>
+</UserControl>

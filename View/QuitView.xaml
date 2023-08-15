@@ -9,8 +9,9 @@
     <Grid>
         <StackPanel VerticalAlignment="Center"
                     HorizontalAlignment="Center"
-                    Margin ="0">
-            <Label Content="Are you sure you wish to quit?"/>
+                    Margin="0,0,800,200">
+            <Label Content="Are you sure you wish to quit?"
+                   Style="{StaticResource NormalLabel}"/>
             <Button Content="Yes"
                     Width="100"
                     Margin="0,10,0,0"

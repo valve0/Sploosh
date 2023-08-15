@@ -9,13 +9,19 @@
     <Grid>
 
         <StackPanel 
-                    Margin="0,0,500,0"
+                    Margin="0,0,800,200"
                     Orientation="Horizontal"
                     VerticalAlignment="Center"
                     HorizontalAlignment="Center">
 
-            <TextBlock VerticalAlignment="Center" HorizontalAlignment="Left" Text="Disable Sound Effects"/>
-            <ToggleButton/>
+            <TextBlock VerticalAlignment="Center"
+                       HorizontalAlignment="Left"
+                       Text="Enable Sound Effects"
+                       Margin="0,0,20,0"
+                       Style="{StaticResource NormalTextBlock}" />
+            
+            <ToggleButton Command="{Binding SoundEffectsCommand}"
+                          IsChecked="{Binding IsChecked}"/>
 
         </StackPanel>
             

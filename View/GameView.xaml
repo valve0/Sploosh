@@ -5,12 +5,8 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:vm="clr-namespace:Sploosh.ViewModel"
         mc:Ignorable="d"
-        Height="1000" Width="1400"
+        Height="900" Width="1400"
         Name="gameWindow">
-
-    <UserControl.Resources>
-       
-    </UserControl.Resources>
 
     <Grid>
 
@@ -23,7 +19,6 @@
             </Grid.ColumnDefinitions>
 
             <Grid.RowDefinitions>
-                
                 <RowDefinition Height="800"/>
                 <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
@@ -32,9 +27,10 @@
             <Label Grid.Column="1"
                    Grid.Row="2"
                    Content="{Binding Feedback}"
+                   Margin="0,0,0,30"
                    HorizontalAlignment="Center"
-                   VerticalAlignment="Center"/>
-
+                   VerticalAlignment="Center"
+                   Style="{StaticResource NormalLabel}"/>
 
 
             <!-- Bomb Grid -->
@@ -59,12 +55,14 @@
                         <Label Content="Shot Counter "
                                VerticalAlignment="Center"
                                HorizontalAlignment="Center"
-                               Margin="10"/>
+                               Margin="10"
+                               Style="{StaticResource NormalLabel}"/>
 
                         <Label  Content="{Binding ShotCounter}"
                                 VerticalAlignment="Center"
                                 HorizontalAlignment="Center"
-                                Margin="10"/>
+                                Margin="10"
+                                Style="{StaticResource NormalLabel}"/>
 
                     </StackPanel>
 
@@ -131,13 +129,15 @@
                     <Label Content="Highscore  "
                            VerticalAlignment="Center"
                            HorizontalAlignment="Center"
-                           Margin="10"/>
+                           Margin="10"
+                           Style="{StaticResource NormalLabel}"/>
 
                     <Label x:Name="highScore"
                            Content="{Binding Highscore}"
                            HorizontalAlignment="Center"
                            VerticalAlignment="Center"
-                           Margin="10"/>
+                           Margin="10"
+                           Style="{StaticResource NormalLabel}"/>
 
                 </StackPanel>
 

@@ -1,37 +1,36 @@
 ﻿using Sploosh.Model;
-using Sploosh.View;
 using System;
-using System.Threading.Tasks;
-using System.Windows;
 using System.Windows.Media;
-using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 
 namespace Sploosh.ViewModel
 {
     public class MainViewModel : ViewModelBase
     {
+
         private ViewModelBase? _selectedViewModel;
 
-        public MainViewModel(GameViewModel gameViewModel,
-      SettingsViewModel settingsViewModel)
+        private DispatcherTimer _timer;
+
+
+        public MainViewModel(SplashViewModel splashViewModel, ApplicationViewModel applicationViewModel)
         {
-            GameViewModel = gameViewModel;
-            SettingsViewModel = settingsViewModel;
-            SelectedViewModel = gameViewModel;
-            ShowSettingsWindowCommand = new DelegateCommand(SelectViewModel);
+            SplashViewModel = splashViewModel; 
+            ApplicationViewModel = applicationViewModel;
+            
+            SelectedViewModel = SplashViewModel;
+
+            ApplicationViewModel.ScreenShakeAnimationEvent1 += ScreenShakeAnimation;
 
             BackgroundImagePath = new BitmapImage(GameModel.BackgroundImage);
 
-            MotifImagePath = new BitmapImage(GameModel.MotifImage);
+            //Timer to control how long splash screen active
+            _timer = new DispatcherTimer();
+            _timer.Interval = TimeSpan.FromSeconds(6); // Change to your desired interval
+            _timer.Tick += Timer_Tick;
+            _timer.Start();
 
-            GameViewModel.ScreenShakeAnimationEvent += ScreenShakeAnimation;
-
-        }
-
-        private void ScreenShakeAnimation()
-        {
-            ScreenShakeAnimationEvent1?.Invoke();
         }
 
         public ViewModelBase? SelectedViewModel
@@ -44,41 +43,25 @@ namespace Sploosh.ViewModel
             }
         }
 
-        public delegate void AttackEventAction();
-        public event AttackEventAction? ScreenShakeAnimationEvent1;
+        public SplashViewModel SplashViewModel { get; }
+
+        public ApplicationViewModel ApplicationViewModel { get; }
 
         public ImageSource BackgroundImagePath { get; private set; }
 
-        public ImageSource MotifImagePath { get; private set; }
+        public delegate void AttackEventAction();
+        public event AttackEventAction? ScreenShakeAnimationEvent2;
 
-        public GameViewModel GameViewModel { get; }
-
-        public SettingsViewModel SettingsViewModel { get; }
-
-        public DelegateCommand ShowSettingsWindowCommand { get; }
-
-
-        public async override Task LoadAsync()
+        private void Timer_Tick(object sender, EventArgs e)
         {
-            if (SelectedViewModel is not null)
-            {
-                await SelectedViewModel.LoadAsync();
-            }
+            // This code will run on the UI thread due to DispatcherTimer
+            SelectedViewModel = ApplicationViewModel;
         }
 
-        private async void SelectViewModel(object? parameter)
+        private void ScreenShakeAnimation()
         {
-            //If the current selecetd view model is already the settings- select the Gameview Model
-            if (SelectedViewModel == parameter as ViewModelBase)
-            {
-                SelectedViewModel = GameViewModel;
-            }
-            else
-            {
-                SelectedViewModel = parameter as ViewModelBase;
-                await LoadAsync();
-            }
-
+            ScreenShakeAnimationEvent2?.Invoke();
         }
+
     }
 }

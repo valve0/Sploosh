@@ -5,14 +5,15 @@
         <Image Source="yourimage.png"/>
     </ControlTemplate>
 
-    <Style TargetType="Label">
+    <Style TargetType="Label" x:Key="NormalLabel">
         <Setter Property="FontFamily" Value="Blackadder ITC"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="Transparent"/>
         <Setter Property="FontSize" Value="30"/>
+
     </Style>
 
-    <Style TargetType="TextBlock">
+    <Style TargetType="TextBlock" x:Key="NormalTextBlock">
         <Setter Property="FontFamily" Value="Blackadder ITC"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -42,7 +43,7 @@
                         <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
 
                             <!-- Main Button Content -->
-                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,50,0"/>
 
                             <Image x:Name="ImageIcon" 
                                        HorizontalAlignment="Center"
@@ -114,48 +115,6 @@
 
     </Style>
 
-
-
-
-    <!--<Style TargetType="Button">
-            <Setter Property="FontFamily" Value="Blackadder ITC"/>
-            <Setter Property="Foreground" Value="Black"/>
-            <Setter Property="Background" Value="Transparent"></Setter>
-            <Setter Property="FontSize" Value="30"/>
-
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type Button}">
-                        <Border Background="{TemplateBinding Background}">
-                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-            <Style.Triggers>
-                <Trigger Property="IsMouseOver" Value="True">
-                    <Trigger.EnterActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Wheat" Duration="0:0:1"></ColorAnimation>
-
-
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.EnterActions>
-                    <Trigger.ExitActions>
-                        <BeginStoryboard>
-                            <Storyboard>
-                                <ColorAnimation Storyboard.TargetProperty="(Button.Background).(SolidColorBrush.Color)" To="Transparent" Duration="0:0:1"></ColorAnimation>
-
-                            </Storyboard>
-                        </BeginStoryboard>
-                    </Trigger.ExitActions>
-
-                </Trigger>
-            </Style.Triggers>
-
-        </Style>-->
 
     <Style x:Key="GridBorder" TargetType="{x:Type ListViewItem}">
 

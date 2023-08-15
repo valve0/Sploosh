@@ -4,66 +4,37 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:viewModel="clr-namespace:Sploosh.ViewModel"
-        xmlns:view="clr-namespace:Sploosh.View"
+        xmlns:view="clr-namespace:Sploosh.View" 
+        xmlns:controls="clr-namespace:Sploosh.Controls"
         mc:Ignorable="d"
         Title="MainWindow" Height="1000" Width="1400"
         ResizeMode="NoReSize"
         Name="mainWindow"
         WindowStyle="SingleBorderWindow">
 
+        <Window.Resources>
 
-    <Window.Resources>
+            <Image x:Key="HoverImage" Source="/Images/Motif.png" Visibility="Collapsed"/>
 
-        <Image x:Key="HoverImage" Source="/Images/Motif.png" Visibility="Collapsed"/>
+            <DataTemplate DataType="{x:Type viewModel:SplashViewModel}">
+                <view:SplashView/>
+            </DataTemplate>
 
-        <DataTemplate DataType="{x:Type viewModel:GameViewModel}">
-            <view:GameView/>
-        </DataTemplate>
-        <DataTemplate DataType="{x:Type viewModel:SettingsViewModel}">
-            <view:SettingsView/>
-        </DataTemplate>
+            <DataTemplate DataType="{x:Type viewModel:ApplicationViewModel}">
+                <view:ApplicationView/>
+            </DataTemplate>
 
-
-        <Storyboard x:Key="MoveLeftAnimation">
-            <DoubleAnimation
-                Storyboard.TargetProperty="(Window.Left)"
-                Duration="0:0:0.15"
-                To="{Binding ActualWidth, RelativeSource={RelativeSource AncestorType=Window}}">
-                <DoubleAnimation.AutoReverse>
-                    True
-                </DoubleAnimation.AutoReverse>
-            </DoubleAnimation>
-        </Storyboard>
-
-    </Window.Resources>
-
+        </Window.Resources>
+    
     <Grid>
 
         <Grid.Background>
             <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
         </Grid.Background>
 
-        <Grid.RowDefinitions>
-            <RowDefinition Height="auto"/>
-            <RowDefinition Height="800"/>
-            <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-
-        <Label
-                   FontSize="70"
-                   Content="Sploosh"
-                   VerticalAlignment="Center"
-                   HorizontalAlignment="Center"
-        />
-        <Button 
-                Command="{Binding ShowSettingsWindowCommand}"
-                CommandParameter="{Binding SettingsViewModel}"
-                Content="Settings"
-                VerticalAlignment="Top"
-                HorizontalAlignment="Right"/>
-
-        <ContentControl Grid.Row="1" Content="{Binding SelectedViewModel}"/>
+        <ContentControl Content="{Binding SelectedViewModel}"/>
 
     </Grid>
+
 
 </Window>

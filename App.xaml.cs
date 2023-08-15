@@ -1,4 +1,5 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Sploosh.Resources;
 using Sploosh.View;
 using Sploosh.ViewModel;
 using System.Windows;
@@ -21,9 +22,13 @@ namespace Sploosh
         private void ConfigureServices(ServiceCollection services)
         {
             //Register the services
+
  
-            services.AddTransient<MainWindow>();
-            services.AddTransient<MainViewModel>();
+            services.AddTransient<MainWindow>();       
+            services.AddTransient<MainViewModel>();         
+            services.AddTransient<SplashViewModel>();
+            services.AddTransient<ApplicationViewModel>();
+
             services.AddTransient<GameViewModel>();
             services.AddTransient<SettingsViewModel>();
             services.AddTransient<AboutViewModel>();
@@ -31,6 +36,8 @@ namespace Sploosh
             services.AddTransient<QuitViewModel>();
             services.AddTransient<RestartViewModel>();
             services.AddTransient<SoundViewModel>();
+
+            services.AddSingleton<UserSettings>();
 
         }
 

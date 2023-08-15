@@ -1,28 +1,46 @@
-﻿
+﻿using Sploosh.Resources;
+
 namespace Sploosh.ViewModel
 {
     public class SoundViewModel : ViewModelBase
     {
-        public SoundViewModel()
+
+        private bool _isChecked;
+
+        public SoundViewModel(UserSettings userSettings)
         {
+            UserSettings = userSettings;
+
             SoundEffectsCommand = new DelegateCommand(SoundEffects);
+
         }
 
-        private void SoundEffects(object? parameter)
-        {
-            //Raise event to diable sound effects
-            if(parameter == null)
-            {
-                EnableDisableSoundEffectsEvent?.Invoke(false);
-            }
-            else
-                EnableDisableSoundEffectsEvent?.Invoke(true);
-        }
+
+        public UserSettings UserSettings { get;}
 
         public DelegateCommand SoundEffectsCommand { get; }
 
-        public delegate void SoundEffectsAction(bool state);
+        public delegate void SoundEffectsAction();
         public event SoundEffectsAction? EnableDisableSoundEffectsEvent;
+
+        
+
+        public bool IsChecked
+        {
+            get { return _isChecked; }
+            set
+            {
+                _isChecked = value;
+                RaisePropertyChanged();
+            }
+        }
+
+
+        private void SoundEffects(object? parameter)
+        {
+            UserSettings.UpdateSoundEffectStatus();
+        }
+
 
     }
 }

@@ -1,9 +1,11 @@
 ﻿using HelperClass;
 using Sploosh.Model;
 using Sploosh.Models;
+using Sploosh.Resources;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Media;
 
@@ -24,9 +26,7 @@ namespace Sploosh.ViewModel
 
 
         private MediaPlayer backgroundPlayer = new();
-        private MediaPlayer hitSoundPlayer = new();
-        private MediaPlayer missSoundPlayer = new();
-        private MediaPlayer killedSoundPlayer = new();
+        private MediaPlayer SoundEffectsPlayer = new();
 
 
         private string backgroundMusicPath;
@@ -35,8 +35,10 @@ namespace Sploosh.ViewModel
         private string squidMissSoundPath;
 
 
-        public GameViewModel()
+        public GameViewModel(UserSettings userSettings)
         {
+            
+            UserSettings = userSettings;
 
             SetupGame();
 
@@ -51,28 +53,12 @@ namespace Sploosh.ViewModel
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
 
-        }
-
-        private void SetupGame()
-        {
-
-
-            
-            //Reset counters
-            _squidKillIndex = 0;
-            _numberOfSquid = 3;
-
-            ShotCounter = 0;
-            Feedback = "";
-           
-
-            Highscore = GameModel.GetHighscore();
-            BombImages = GameModel.GetBombImages();
-            OneDSquares = GameModel.GetOneDSquares();
-            SquidsLeftImages = GameModel.GetSquidImages();
+            SoundEffectsPlayer.Volume = 0;
 
         }
 
+
+        public UserSettings UserSettings { get;}
 
         public delegate void AttackEventAction();
         public event AttackEventAction? ScreenShakeAnimationEvent;
@@ -169,15 +155,56 @@ namespace Sploosh.ViewModel
             SetupGame();
         }
 
+        /// <summary>
+        /// Runs everytime view model is loaded-checks fort changes in user settings
+        /// </summary>
+        public async override Task LoadAsync()
+        {
+            //Check for updates in UserSettings
+
+            if(UserSettings.SoundEffectsStatus == false)
+                SoundEffectsPlayer.Volume = 0;
+            else
+                SoundEffectsPlayer.Volume = 0.2;
+
+            if(UserSettings.RestartGameTrigger == true)
+            {
+                UserSettings.UpdateRestartGameTrigger();
+                RestartGame();
+            }
+
+        }
+
 
         /// <summary>
         /// Forces an update of the displayed properties in the main window
+        /// At the moment the properties dont recognise when thier own properties get updated so need to force it
         /// </summary>
         private void UpdateMainWindow()
         {
             BombImages = new ObservableCollection<ImageHolder>(BombImages);
             OneDSquares = new ObservableCollection<Square>(OneDSquares);
             SquidsLeftImages = new ObservableCollection<ImageHolder>(SquidsLeftImages);
+        }
+
+
+        /// <summary>
+        /// Initialises the fields and properties at the start of the game
+        /// </summary>
+        private void SetupGame()
+        {
+
+            _squidKillIndex = 0;
+            _numberOfSquid = 3;
+
+            ShotCounter = 0;
+            Feedback = "";
+
+            Highscore = GameModel.GetHighscore();
+            BombImages = GameModel.GetBombImages();
+            OneDSquares = GameModel.GetOneDSquares();
+            SquidsLeftImages = GameModel.GetSquidImages();
+
         }
 
         /// <summary>
@@ -202,12 +229,12 @@ namespace Sploosh.ViewModel
 
                     _squidKillIndex++;
 
-                    SquidKilledMethod(); //Hit- Squid killed
+                    PlaySquidKilledSound(); //Hit- Squid killed
                     Feedback = "Squid destroyed!";
                 }
                 else
                 {
-                    AttackMethod(true); //Hit
+                    PlayAttackSounds(true); //Hit
                     Feedback = "Hit!";
                 }
                     
@@ -218,7 +245,7 @@ namespace Sploosh.ViewModel
 
                 OneDSquares[selectedIndex].ImagePath = GameModel.SquareMissPath;
 
-                AttackMethod(false); //Miss
+                PlayAttackSounds(false); //Miss
                 Feedback = "Miss!";
 
             }
@@ -286,20 +313,20 @@ namespace Sploosh.ViewModel
         /// When the attack method is called this plays the appropriate 
         /// sound effect for a hit/miss
         /// </summary>
-        private void AttackMethod(bool hit)
+        private void PlayAttackSounds(bool hit)
         {
 
             if (hit == true)
             {
-                hitSoundPlayer.Open(new Uri(squidHitSoundPath, UriKind.Relative));
-                hitSoundPlayer.Play();
+                SoundEffectsPlayer.Open(new Uri(squidHitSoundPath, UriKind.Relative));
+                SoundEffectsPlayer.Play();
                 ScreenShakeAnimationEvent?.Invoke();
 
             }
             else
             {
-                missSoundPlayer.Open(new Uri(squidMissSoundPath, UriKind.Relative));
-                missSoundPlayer.Play();
+                SoundEffectsPlayer.Open(new Uri(squidMissSoundPath, UriKind.Relative));
+                SoundEffectsPlayer.Play();
             }
 
         }
@@ -307,10 +334,10 @@ namespace Sploosh.ViewModel
         /// <summary>
         /// When the Squid Killed event occurs this plays the appropriate sound effect
         /// </summary>
-        private void SquidKilledMethod()
+        private void PlaySquidKilledSound()
         {
-            killedSoundPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
-            killedSoundPlayer.Play();
+            SoundEffectsPlayer.Open(new Uri(squidDeadSoundPath, UriKind.Relative));
+            SoundEffectsPlayer.Play();
 
         }
 

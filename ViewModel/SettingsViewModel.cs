@@ -15,6 +15,7 @@ namespace Sploosh.ViewModel
         {
 
             ShowSelectedViewCommand = new DelegateCommand(SelectViewModel);
+
             SoundViewModel = soundViewModel;
             HelpViewModel = helpViewModel;
             QuitViewModel = quitViewModel;
@@ -24,9 +25,9 @@ namespace Sploosh.ViewModel
             SoundViewModel.EnableDisableSoundEffectsEvent += EnableDisableSoundEffectsEvent;
         }
 
-        private void EnableDisableSoundEffectsEvent(bool state)
+        private void EnableDisableSoundEffectsEvent()
         {
-            EnableDisableSoundEffectsEvent2?.Invoke(state);
+            EnableDisableSoundEffectsEvent2?.Invoke();
         }
 
 
@@ -48,7 +49,7 @@ namespace Sploosh.ViewModel
 
         public DelegateCommand ShowSelectedViewCommand { get; }
 
-        public delegate void SoundEffectsAction(bool state);
+        public delegate void SoundEffectsAction();
         public event SoundEffectsAction? EnableDisableSoundEffectsEvent2;
 
 

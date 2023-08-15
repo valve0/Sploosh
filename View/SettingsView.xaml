@@ -6,7 +6,7 @@
         xmlns:viewModel="clr-namespace:Sploosh.ViewModel"
         xmlns:view="clr-namespace:Sploosh.View"
         mc:Ignorable="d"
-        Height="950" Width="1400">
+        Height="950" Width="1250">
 
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type viewModel:SoundViewModel}">

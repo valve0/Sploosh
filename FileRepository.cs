@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-
 namespace HelperClass
 {
     internal class FileRepository

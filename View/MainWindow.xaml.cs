@@ -11,13 +11,15 @@ namespace Sploosh.View
 
         public MainWindow(MainViewModel mainViewModel)
         {
+
+            InitializeComponent();
+
             _mainViewModel = mainViewModel;
 
             DataContext = _mainViewModel;
 
-            _mainViewModel.ScreenShakeAnimationEvent1 += ScreenShakeAnimation;
-
-            InitializeComponent();
+            _mainViewModel.ScreenShakeAnimationEvent2 += ScreenShakeAnimation;
+      
         }
 
         private void ScreenShakeAnimation()

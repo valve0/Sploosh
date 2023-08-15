@@ -8,9 +8,11 @@
         Height="950" Width="1250">
     <Grid>
         <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center">
+                    HorizontalAlignment="Center"
+                    Margin="0,0,800,200">
 
-            <Label Content="Help"/>
+            <Label Content="Help"
+                   Style="{StaticResource NormalLabel}"/>
 
         </StackPanel>
     </Grid>
