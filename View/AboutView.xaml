@@ -9,12 +9,21 @@
     
     <Grid>
         <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,800,200">
-            
-            <Label Content="About"
-                   Style="{StaticResource NormalLabel}"/>
-            
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,200">
+            <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Width="500">
+                <FlowDocument FontFamily="Blackadder ITC" FontSize="30">
+                    <Paragraph> This is application is based on the mini-game "Sploosh Kaboom" from the The Legend of Zelda WindWaker.
+                        This was a project to learn WPF and pay respects to the most fustrating mini-game I know.</Paragraph>
+                    <Paragraph>A link to the GitHub
+                        <Hyperlink NavigateUri="https://github.com/valve0/Sploosh">Repo</Hyperlink>
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+
+
+
+
         </StackPanel>
     </Grid>
 </UserControl>

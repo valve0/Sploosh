@@ -27,6 +27,9 @@ public class GameModel
     public static readonly Uri SquidAlivePath = new Uri($@"{AssemblyDirectory}\Images\SquidAlive.png");
     public static readonly Uri SquidDeadPath = new Uri($@"{AssemblyDirectory}\Images\SquidDead.png");
     public static readonly Uri MotifImage = new Uri($@"{AssemblyDirectory}\Images\Motif.png");
+    public static readonly Uri HelpImage1 = new Uri($@"{AssemblyDirectory}\Images\Help1.png");
+    public static readonly Uri HelpImage2 = new Uri($@"{AssemblyDirectory}\Images\Help2.png");
+    public static readonly Uri HelpImage3 = new Uri($@"{AssemblyDirectory}\Images\Help3.png");
 
     /// <summary>
     /// Returns the highscore read from the Highscore textfile

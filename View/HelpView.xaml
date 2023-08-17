@@ -8,11 +8,57 @@
         Height="950" Width="1250">
     <Grid>
         <StackPanel VerticalAlignment="Center"
-                    HorizontalAlignment="Center"
-                    Margin="0,0,800,200">
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,200">
 
-            <Label Content="Help"
-                   Style="{StaticResource NormalLabel}"/>
+            <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Width="746" >
+                <FlowDocument>
+                    <Table>
+                        <Table.Columns>
+                            <TableColumn Width="200"/>
+                            <TableColumn Width="200"/>
+                            <TableColumn Width="200"/>
+                        </Table.Columns>
+                        <TableRowGroup Paragraph.TextAlignment="Center" FontFamily="Blackadder ITC" FontSize="30">
+                            <TableRow>
+                                <TableCell>
+                                    <BlockUIContainer>
+                                        <Image Source="{Binding Help1}" Width="200" Height="200"/>
+                                    </BlockUIContainer>
+                                </TableCell>
+                                <TableCell>
+                                    <BlockUIContainer>
+                                        <Image Source="{Binding Help2}" Width="200" Height="200"/>
+                                    </BlockUIContainer>
+                                </TableCell>
+                                <TableCell>
+                                    <BlockUIContainer>
+                                        <Image Source="{Binding Help3}" Width="200" Height="200"/>
+                                    </BlockUIContainer>
+                                </TableCell>
+                            </TableRow>
+                            <TableRow>
+                                <TableCell>
+                                    <Paragraph>Select a square on the grid to fire your cannon,
+                                        you have 24 shots to find and destroy all 3 evil squids.</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>One squid is 2 squares long, another is 3 long and the last is 4 long.
+                                        They cannot be placed diagonally</Paragraph>
+                                </TableCell>
+                                <TableCell>
+                                    <Paragraph>Hit all parts of the squid to destroy it completely. Good-luck sailor!</Paragraph>
+                                </TableCell>
+                            </TableRow>
+                        </TableRowGroup>
+                    </Table>
+                </FlowDocument>
+                <FlowDocumentScrollViewer.Resources>
+                    <Style TargetType="ScrollBar">
+                        <Setter Property="Visibility" Value="Hidden" />
+                    </Style>
+                </FlowDocumentScrollViewer.Resources>
+            </FlowDocumentScrollViewer>
 
         </StackPanel>
     </Grid>

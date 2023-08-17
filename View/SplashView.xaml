@@ -38,7 +38,7 @@
                    HorizontalAlignment="Center">
 
                 <Label.RenderTransform>
-                    <TranslateTransform X="550" Y="1000"/>
+                    <TranslateTransform X="530" Y="1000"/>
                 </Label.RenderTransform>
                 
             </Label>
@@ -47,7 +47,7 @@
                    Content="Sploosh"
                    Style="{StaticResource WelcomeStyle}">
                 <Label.RenderTransform>
-                    <TranslateTransform X="600" Y="500"/>
+                    <TranslateTransform X="580" Y="500"/>
                 </Label.RenderTransform>
             </Label>
 
