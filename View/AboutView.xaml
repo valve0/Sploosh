@@ -1,0 +1,29 @@
+﻿<UserControl x:Class="Sploosh.View.AboutView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Sploosh"
+        mc:Ignorable="d"
+        Height="950" Width="1250">
+    
+    <Grid>
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Left"
+                    Margin="0,0,0,200">
+            <FlowDocumentScrollViewer VerticalScrollBarVisibility="Hidden" Width="500">
+                <FlowDocument FontFamily="Blackadder ITC" FontSize="30">
+                    <Paragraph> This is application is based on the mini-game "Sploosh Kaboom" from the The Legend of Zelda WindWaker.
+                        This was a project to learn WPF and pay respects to the most fustrating mini-game I know.</Paragraph>
+                    <Paragraph>A link to the GitHub
+                        <Hyperlink NavigateUri="https://github.com/valve0/Sploosh">Repo</Hyperlink>
+                    </Paragraph>
+                </FlowDocument>
+            </FlowDocumentScrollViewer>
+
+
+
+
+        </StackPanel>
+    </Grid>
+</UserControl>

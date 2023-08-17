@@ -1,0 +1,27 @@
+﻿<UserControl x:Class="Sploosh.Controls.HeaderControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Sploosh.Controls"
+             mc:Ignorable="d" 
+             Height="100" Width="1400">
+    <Grid>
+
+        <Label
+                   FontSize="70"
+                   Content="Sploosh"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource NormalLabel}"
+        />
+        <Button 
+                Command="{Binding ShowSettingsWindowCommand}"
+                CommandParameter="{Binding SettingsViewModel}"
+                Content="Settings"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Margin="0,0,20,0"/>
+
+    </Grid>
+</UserControl>

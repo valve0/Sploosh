@@ -1,0 +1,40 @@
+﻿<Window x:Class="Sploosh.View.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Sploosh.ViewModel"
+        xmlns:view="clr-namespace:Sploosh.View" 
+        xmlns:controls="clr-namespace:Sploosh.Controls"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="1000" Width="1400"
+        ResizeMode="NoReSize"
+        Name="mainWindow"
+        WindowStyle="SingleBorderWindow">
+
+        <Window.Resources>
+
+            <Image x:Key="HoverImage" Source="/Images/Motif.png" Visibility="Collapsed"/>
+
+            <DataTemplate DataType="{x:Type viewModel:SplashViewModel}">
+                <view:SplashView/>
+            </DataTemplate>
+
+            <DataTemplate DataType="{x:Type viewModel:ApplicationViewModel}">
+                <view:ApplicationView/>
+            </DataTemplate>
+
+        </Window.Resources>
+    
+    <Grid>
+
+        <Grid.Background>
+            <ImageBrush ImageSource="{Binding BackgroundImagePath}" Stretch="UniformToFill" />
+        </Grid.Background>
+
+        <ContentControl Content="{Binding SelectedViewModel}"/>
+
+    </Grid>
+
+
+</Window>

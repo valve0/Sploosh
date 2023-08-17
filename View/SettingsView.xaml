@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Sploosh.View.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:viewModel="clr-namespace:Sploosh.ViewModel"
+        xmlns:view="clr-namespace:Sploosh.View"
+        mc:Ignorable="d"
+        Height="950" Width="1250">
+
+    <UserControl.Resources>
+        <DataTemplate DataType="{x:Type viewModel:SoundViewModel}">
+            <view:SoundView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:AboutViewModel}">
+            <view:AboutView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:HelpViewModel}">
+            <view:HelpView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:RestartViewModel}">
+            <view:RestartView/>
+        </DataTemplate>
+        <DataTemplate DataType="{x:Type viewModel:QuitViewModel}">
+            <view:QuitView/>
+        </DataTemplate>
+    </UserControl.Resources>
+    
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" 
+                    Margin="50,0,50,50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+            <Button Content="Sound"
+                    Margin="10"
+                    Command="{Binding ShowSelectedViewCommand}"
+                    CommandParameter="{Binding SoundViewModel}"/>
+            <Button Content="About"
+                    Margin="10"
+                    Command="{Binding ShowSelectedViewCommand}"
+                    CommandParameter="{Binding AboutViewModel}"/>
+            <Button Content="Help"
+                    Margin="10"
+                    Command="{Binding ShowSelectedViewCommand}"
+                    CommandParameter="{Binding HelpViewModel}"/>
+            <Button Content="Restart"
+                    Margin="10"
+                    Command="{Binding ShowSelectedViewCommand}"
+                    CommandParameter="{Binding RestartViewModel}"/>
+            <Button Content="Quit"
+                    Margin="10"
+                    Command="{Binding ShowSelectedViewCommand}"
+                    CommandParameter="{Binding QuitViewModel}"/>
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" Content="{Binding SelectedViewModel}"/>
+    </Grid>
+
+</UserControl>

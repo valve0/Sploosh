@@ -1,43 +1,26 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace Sploosh
 {
-    class RelayCommand:ICommand
+    public class DelegateCommand : ICommand
     {
+        private readonly Action<object?> _execute;
+        private readonly Func<object?, bool>? _canExecute;
+
+        public DelegateCommand(Action<object?> execute, Func<object?, bool>? canExecute = null)
+        {
+            ArgumentNullException.ThrowIfNull(execute);
+            _execute = execute;
+            _canExecute = canExecute;
+        }
+
+        public void RaiseCanExecuteChanged() => CanExecuteChanged?.Invoke(this, EventArgs.Empty);
+
         public event EventHandler? CanExecuteChanged;
 
-        private Action<object> _Execute { get; set; }
-        private Predicate<object> _CanExecute { get; set; }
+        public bool CanExecute(object? parameter) => _canExecute is null || _canExecute(parameter);
 
-
-        public RelayCommand(Action<object> ExecuteMethod, Predicate<object> CanExecuteMethod)
-        {
-            _Execute = ExecuteMethod;
-            _CanExecute = CanExecuteMethod;
-
-        }
-
-        public RelayCommand(Action<object> ExecuteMethod)
-        {
-            _Execute = ExecuteMethod;
-
-        }
-
-
-        public bool CanExecute(object? parameter)
-        {
-            return _CanExecute(parameter);
-        }
-
-        public void Execute(object? parameter)
-        {
-            _Execute(parameter);
-        }
-
+        public void Execute(object? parameter) => _execute(parameter);
     }
 }
