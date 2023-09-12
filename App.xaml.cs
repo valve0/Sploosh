@@ -22,8 +22,6 @@ namespace Sploosh
         private void ConfigureServices(ServiceCollection services)
         {
             //Register the services
-
- 
             services.AddTransient<MainWindow>();       
             services.AddTransient<MainViewModel>();         
             services.AddTransient<SplashViewModel>();

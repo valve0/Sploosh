@@ -1,7 +1,8 @@
-﻿using Sploosh.Model;
+﻿using Sploosh.UI.Commands;
+using SplooshGameEngine;
 using System.Threading.Tasks;
-using System.Windows.Media.Imaging;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Sploosh.ViewModel
 {
@@ -12,16 +13,16 @@ namespace Sploosh.ViewModel
         public ApplicationViewModel(GameViewModel gameViewModel,
       SettingsViewModel settingsViewModel)
         {
-            
+
             GameViewModel = gameViewModel;
             SettingsViewModel = settingsViewModel;
 
             SelectedViewModel = GameViewModel;
 
 
-            ShowSettingsWindowCommand = new DelegateCommand(SelectViewModel);    
+            ShowSettingsWindowCommand = new DelegateCommand(SelectViewModel);
 
-            MotifImagePath = new BitmapImage(GameModel.MotifImage);
+            MotifImagePath = new BitmapImage(EnvironmentVariables.MotifImage);
 
             GameViewModel.ScreenShakeAnimationEvent += ScreenShakeAnimation;
 
@@ -48,7 +49,7 @@ namespace Sploosh.ViewModel
         public delegate void AttackEventAction();
         public event AttackEventAction? ScreenShakeAnimationEvent1;
 
-        
+
 
         public ImageSource MotifImagePath { get; private set; }
 

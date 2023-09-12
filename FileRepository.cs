@@ -1,4 +1,4 @@
-﻿using Sploosh.Model;
+﻿using SplooshGameEngine;
 using System;
 using System.Diagnostics;
 using System.IO;
@@ -15,14 +15,14 @@ namespace HelperClass
         /// </summary>
         public static string LoadStringFromFile(string fileName)
         {
-            string path = @$"{GameModel.AssemblyDirectory}\{fileName}";
+            string path = @$"{EnvironmentVariables.AssemblyDirectory}\{fileName}";
 
             StringBuilder stringBuilder = new StringBuilder();
 
 
             try
             {
-                if(File.Exists(path))
+                if (File.Exists(path))
                 {
 
                     foreach (string line in File.ReadAllLines(path))
@@ -32,7 +32,7 @@ namespace HelperClass
 
                     }
                 }
-                
+
             }
             catch (FileNotFoundException fnfex)
             {
@@ -51,9 +51,9 @@ namespace HelperClass
         /// <summary>
         /// This writes a given string to a given filename in the assembly directory
         /// </summary>
-        public static void WriteStringToFile(string fileName, string stringToWrite) 
+        public static void WriteStringToFile(string fileName, string stringToWrite)
         {
-            string path = @$"{GameModel.AssemblyDirectory}\{fileName}";
+            string path = @$"{EnvironmentVariables.AssemblyDirectory}\{fileName}";
 
             //Overwrites all text in file
             File.WriteAllText(path, stringToWrite);

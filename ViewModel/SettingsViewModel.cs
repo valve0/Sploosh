@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Threading.Tasks;
+using Sploosh.UI.Commands;
 
 namespace Sploosh.ViewModel
 {

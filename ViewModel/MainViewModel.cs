@@ -1,4 +1,4 @@
-﻿using Sploosh.Model;
+﻿using SplooshGameEngine;
 using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -16,14 +16,14 @@ namespace Sploosh.ViewModel
 
         public MainViewModel(SplashViewModel splashViewModel, ApplicationViewModel applicationViewModel)
         {
-            SplashViewModel = splashViewModel; 
+            SplashViewModel = splashViewModel;
             ApplicationViewModel = applicationViewModel;
-            
+
             SelectedViewModel = SplashViewModel;
 
             ApplicationViewModel.ScreenShakeAnimationEvent1 += ScreenShakeAnimation;
 
-            BackgroundImagePath = new BitmapImage(GameModel.BackgroundImage);
+            BackgroundImagePath = new BitmapImage(EnvironmentVariables.BackgroundImage);
 
             //Timer to control how long splash screen active
             _timer = new DispatcherTimer();
