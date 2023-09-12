@@ -16,9 +16,9 @@ namespace Sploosh.ViewModel
 
         public HelpViewModel()
 		{
-			Help1 = new BitmapImage(GameModel.HelpImage1);
-            Help2 = new BitmapImage(GameModel.HelpImage2);
-            Help3 = new BitmapImage(GameModel.HelpImage3);
+			Help1 = new BitmapImage(GameState.HelpImage1);
+            Help2 = new BitmapImage(GameState.HelpImage2);
+            Help3 = new BitmapImage(GameState.HelpImage3);
         }
 
 		public ImageSource Help1

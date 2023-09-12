@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Windows.Input;
 
-namespace Sploosh
+namespace Sploosh.UI.Commands
 {
     public class DelegateCommand : ICommand
     {

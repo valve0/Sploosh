@@ -1,7 +1,8 @@
 ﻿using HelperClass;
-using Sploosh.Model;
-using Sploosh.Models;
 using Sploosh.Resources;
+using SplooshGameEngine;
+using SplooshGameEngine.Model;
+using SplooshKaboom.GameEngine;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
@@ -20,9 +21,9 @@ namespace Sploosh.ViewModel
         private int _shotCounter;
         private int _highScore;
         private string _feedback;
-        private ObservableCollection<ImageHolder> _squidsLeftImages;
-        private ObservableCollection<ImageHolder> _bombImages;
-        private ObservableCollection<Square> _oneDSquares;
+        private ObservableCollection<Uri> _squidsLeftImages;
+        private ObservableCollection<Uri> _bombImages;
+        private ObservableCollection<Uri> _squareImages;
 
 
         private MediaPlayer backgroundPlayer = new();
@@ -34,31 +35,26 @@ namespace Sploosh.ViewModel
         private string squidHitSoundPath;
         private string squidMissSoundPath;
 
-
         public GameViewModel(UserSettings userSettings)
         {
-            
+
             UserSettings = userSettings;
 
-            SetupGame();
+            RestartGame();
+            Feedback = "";
 
-            //Sounds
-            backgroundMusicPath = GameModel.AssemblyDirectory + "/Sounds/BackgroundMusic.mp3";
-            squidDeadSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidDead.mp3";
-            squidHitSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidHit.mp3";
-            squidMissSoundPath = GameModel.AssemblyDirectory + "/Sounds/SquidMiss.mp3";
-
-
-            backgroundPlayer.Open(new Uri(backgroundMusicPath, UriKind.Relative));
+            backgroundPlayer.Open(EnvironmentVariables.backgroundMusicPath);
             backgroundPlayer.MediaEnded += new EventHandler(BackgroundMusicEnded);
             backgroundPlayer.Play();
 
             SoundEffectsPlayer.Volume = 0;
 
+            GameState = new();
+
         }
 
 
-        public UserSettings UserSettings { get;}
+        public UserSettings UserSettings { get; }
 
         public delegate void AttackEventAction();
         public event AttackEventAction? ScreenShakeAnimationEvent;
@@ -84,18 +80,18 @@ namespace Sploosh.ViewModel
             }
         }
 
-        public ObservableCollection<Square> OneDSquares
+        public ObservableCollection<Uri> SquareImages
         {
-            get { return _oneDSquares; }
+            get { return _squareImages; }
             set
             {
-                _oneDSquares = value;
+                _squareImages = value;
                 RaisePropertyChanged();
             }
         }
 
 
-        public ObservableCollection<ImageHolder> BombImages
+        public ObservableCollection<Uri> BombImages
         {
             get { return _bombImages; }
             set
@@ -105,7 +101,7 @@ namespace Sploosh.ViewModel
             }
         }
 
-        public ObservableCollection<ImageHolder> SquidsLeftImages
+        public ObservableCollection<Uri> SquidsLeftImages
         {
             get { return _squidsLeftImages; }
             set
@@ -140,11 +136,13 @@ namespace Sploosh.ViewModel
                 Debug.WriteLine($"Selected Index: {_selectedIndex}");
 
 
-                if (_selectedIndex != -1 && OneDSquares[_selectedIndex].AttackStatus == true) // -1 = setup value
+                if (_selectedIndex != -1) // -1 = setup value
                     AttackSquare(_selectedIndex);
 
             }
         }
+
+        public GameState GameState { get; private set; }
 
 
         /// <summary>
@@ -152,7 +150,13 @@ namespace Sploosh.ViewModel
         /// </summary>
         public void RestartGame()
         {
-            SetupGame();
+            GameState.SetupGame();
+
+            BombImages = new ObservableCollection<Uri>(BombImages);
+            SquidsLeftImages = new ObservableCollection<Uri>(SquidsLeftImages);
+            SquareImages = new ObservableCollection<Uri>(SquareImages);
+
+
         }
 
         /// <summary>
@@ -162,12 +166,12 @@ namespace Sploosh.ViewModel
         {
             //Check for updates in UserSettings
 
-            if(UserSettings.SoundEffectsStatus == false)
+            if (UserSettings.SoundEffectsStatus == false)
                 SoundEffectsPlayer.Volume = 0;
             else
                 SoundEffectsPlayer.Volume = 0.2;
 
-            if(UserSettings.RestartGameTrigger == true)
+            if (UserSettings.RestartGameTrigger == true)
             {
                 UserSettings.UpdateRestartGameTrigger();
                 RestartGame();
@@ -176,36 +180,17 @@ namespace Sploosh.ViewModel
         }
 
 
-        /// <summary>
-        /// Forces an update of the displayed properties in the main window
-        /// At the moment the properties dont recognise when thier own properties get updated so need to force it
-        /// </summary>
-        private void UpdateMainWindow()
-        {
-            BombImages = new ObservableCollection<ImageHolder>(BombImages);
-            OneDSquares = new ObservableCollection<Square>(OneDSquares);
-            SquidsLeftImages = new ObservableCollection<ImageHolder>(SquidsLeftImages);
-        }
+        ///// <summary>
+        ///// Forces an update of the displayed properties in the main window
+        ///// At the moment the properties dont recognise when thier own properties get updated so need to force it
+        ///// </summary>
+        //private void UpdateMainWindow()
+        //{
+        //    BombImages = new ObservableCollection<Uri>(BombImages);
+        //    OneDSquares = new ObservableCollection<Uri>(OneDSquares);
+        //    SquidsLeftImages = new ObservableCollection<Uri>(SquidsLeftImages);
+        //}
 
-
-        /// <summary>
-        /// Initialises the fields and properties at the start of the game
-        /// </summary>
-        private void SetupGame()
-        {
-
-            _squidKillIndex = 0;
-            _numberOfSquid = 3;
-
-            ShotCounter = 0;
-            Feedback = "";
-
-            Highscore = GameModel.GetHighscore();
-            BombImages = GameModel.GetBombImages();
-            OneDSquares = GameModel.GetOneDSquares();
-            SquidsLeftImages = GameModel.GetSquidImages();
-
-        }
 
         /// <summary>
         /// Run when a square on the grid is selected. If the square has a squid
@@ -215,51 +200,74 @@ namespace Sploosh.ViewModel
         private void AttackSquare(int selectedIndex)
         {
 
-            //If attackable and squid present
-            if (OneDSquares[selectedIndex].SquidPresent == true)
+            //Convert selected index into 2d array index.
+            int[] twoDIndex = {selectedIndex/8,selectedIndex%8};
+
+
+            var attackResultCode = GameState.MakeShot(twoDIndex);
+
+            switch (attackResultCode)
             {
-
-                OneDSquares[selectedIndex].ImagePath = GameModel.SquareHitPath;
-
-                if (OneDSquares[selectedIndex].AttackSquid())
-                {
-                    //Returned true which means a squid killed
-
-                    SquidsLeftImages[_squidKillIndex].ImagePath = GameModel.SquidDeadPath;
-
-                    _squidKillIndex++;
-
-                    PlaySquidKilledSound(); //Hit- Squid killed
-                    Feedback = "Squid destroyed!";
-                }
-                else
-                {
-                    PlayAttackSounds(true); //Hit
-                    Feedback = "Hit!";
-                }
-                    
-
-            }
-            else //If attackable but no squid
-            {
-
-                OneDSquares[selectedIndex].ImagePath = GameModel.SquareMissPath;
-
-                PlayAttackSounds(false); //Miss
-                Feedback = "Miss!";
-
+                case AttackResultCode.None:
+                    break;
+                case AttackResultCode.Miss:
+                    break;
+                case AttackResultCode.Hit:
+                    break;
+                case AttackResultCode.SquidDead:
+                    break;
+                case AttackResultCode.GameWin:
+                    break;
+                case AttackResultCode.GameLose:
+                    break;
             }
 
-            //Update selected square and change it's attack status so it cannot be attacked again
-            OneDSquares[selectedIndex].AttackStatus = false;
 
-            //Change a bomb to unavailable
-            BombImages[ShotCounter].ImagePath = GameModel.BombUnavailablePath;
-            ShotCounter++;
+            ////If attackable and squid present
+            //if (OneDSquares[selectedIndex].SquidPresent == true)
+            //{
 
-            UpdateMainWindow();
+            //    OneDSquares[selectedIndex].ImagePath = GameState.SquareHitPath;
 
-            CheckForEnd();
+            //    if (OneDSquares[selectedIndex].AttackSquid())
+            //    {
+            //        //Returned true which means a squid killed
+
+            //        SquidsLeftImages[_squidKillIndex].ImagePath = GameState.SquidDeadPath;
+
+            //        _squidKillIndex++;
+
+            //        PlaySquidKilledSound(); //Hit- Squid killed
+            //        Feedback = "Squid destroyed!";
+            //    }
+            //    else
+            //    {
+            //        PlayAttackSounds(true); //Hit
+            //        Feedback = "Hit!";
+            //    }
+
+
+            //}
+            //else //If attackable but no squid
+            //{
+
+            //    OneDSquares[selectedIndex].ImagePath = GameState.SquareMissPath;
+
+            //    PlayAttackSounds(false); //Miss
+            //    Feedback = "Miss!";
+
+            //}
+
+            ////Update selected square and change it's attack status so it cannot be attacked again
+            //OneDSquares[selectedIndex].AttackStatus = false;
+
+            ////Change a bomb to unavailable
+            //BombImages[ShotCounter].ImagePath = GameState.BombUnavailablePath;
+            //ShotCounter++;
+
+            //UpdateMainWindow();
+
+            //CheckForEnd();
 
         }
 
@@ -272,32 +280,32 @@ namespace Sploosh.ViewModel
             {
                 MessageBox.Show("You Win");
                 CheckForHighScore();
-                SetupGame();
+                RestartGame();
 
             }
-            else if (ShotCounter == GameModel.MaxShotCount)
+            else if (ShotCounter == GameState.MaxShotCount)
             {
                 MessageBox.Show("You Lose");
-                SetupGame();
+                RestartGame();
             }
         }
 
-        /// <summary>
-        /// Checks whether the final score of the user beats that of the stored Highscore
-        /// If so, it updates the Highscore property and writes the new result to the Highscore file.
-        /// </summary>
-        private void CheckForHighScore()
-        {
-           
-            if (ShotCounter < Highscore)
-            {
-                //update highscore property and textfile
-                Highscore = ShotCounter;
-                FileRepository.WriteStringToFile(GameModel.HighscoreFileName, Highscore.ToString());
+        ///// <summary>
+        ///// Checks whether the final score of the user beats that of the stored Highscore
+        ///// If so, it updates the Highscore property and writes the new result to the Highscore file.
+        ///// </summary>
+        //private void CheckForHighScore()
+        //{
 
-            }
+        //    if (ShotCounter < Highscore)
+        //    {
+        //        //update highscore property and textfile
+        //        Highscore = ShotCounter;
+        //        FileRepository.WriteStringToFile(GameState.HighscoreFileName, Highscore.ToString());
 
-        }
+        //    }
+
+        //}
 
         /// <summary>
         /// This plasy the background music on loop
