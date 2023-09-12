@@ -37,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\Projects\SplooshKaboom\SplooshKaboom.GameEngine\SplooshKaboom.GameEngine.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Desktop\Projects\Sploosh.GameEngine\Sploosh.GameEngine\Sploosh.GameEngine.csproj" />
   </ItemGroup>
 
   <ItemGroup>

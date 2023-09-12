@@ -1,7 +1,6 @@
-﻿using Sploosh.Resources;
+﻿using Sploosh.GameEngine;
+using Sploosh.Resources;
 using Sploosh.UI.Resources;
-using SplooshGameEngine;
-using SplooshKaboom.GameEngine;
 using System;
 using System.Collections.ObjectModel;
 using System.Diagnostics;
