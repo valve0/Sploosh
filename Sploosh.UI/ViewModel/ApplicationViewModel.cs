@@ -1,5 +1,5 @@
 ﻿using Sploosh.UI.Commands;
-using SplooshGameEngine;
+using Sploosh.UI.Resources;
 using System.Threading.Tasks;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;

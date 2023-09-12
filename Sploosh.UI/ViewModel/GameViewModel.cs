@@ -1,7 +1,6 @@
-﻿using HelperClass;
-using Sploosh.Resources;
+﻿using Sploosh.Resources;
+using Sploosh.UI.Resources;
 using SplooshGameEngine;
-using SplooshGameEngine.Model;
 using SplooshKaboom.GameEngine;
 using System;
 using System.Collections.ObjectModel;
@@ -201,7 +200,7 @@ namespace Sploosh.ViewModel
         {
 
             //Convert selected index into 2d array index.
-            int[] twoDIndex = {selectedIndex/8,selectedIndex%8};
+            int[] twoDIndex = { selectedIndex / 8, selectedIndex % 8 };
 
 
             var attackResultCode = GameState.MakeShot(twoDIndex);
@@ -279,7 +278,7 @@ namespace Sploosh.ViewModel
             if (_squidKillIndex == _numberOfSquid)
             {
                 MessageBox.Show("You Win");
-                CheckForHighScore();
+                //CheckForHighScore();
                 RestartGame();
 
             }

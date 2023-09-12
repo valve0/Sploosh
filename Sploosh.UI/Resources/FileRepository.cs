@@ -1,10 +1,9 @@
-﻿using SplooshGameEngine;
-using System;
+﻿using System;
 using System.Diagnostics;
 using System.IO;
 using System.Text;
 
-namespace HelperClass
+namespace Sploosh.UI.Resources
 {
     internal class FileRepository
     {

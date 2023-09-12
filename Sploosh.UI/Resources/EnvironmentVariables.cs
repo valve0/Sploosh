@@ -2,7 +2,7 @@
 using System.IO;
 using System.Reflection;
 
-namespace SplooshGameEngine
+namespace Sploosh.UI.Resources
 {
     public static class EnvironmentVariables
     {

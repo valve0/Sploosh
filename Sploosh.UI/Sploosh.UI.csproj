@@ -8,7 +8,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Highscore.txt" />
     <None Remove="Images\Motif.png" />
     <None Remove="Images\SquareStart2.png" />
     <None Remove="Images\SquidAlive.png" />
@@ -17,9 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="HighScore.txt">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Images\SquidAlive.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -41,7 +37,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\Desktop\Projects\SplooshKaboom\SplooshKaboom.GameEngine\SplooshKaboom.GameEngine.csproj" />
+    <ProjectReference Include="..\..\..\..\..\Desktop\Projects\SplooshKaboom\SplooshKaboom.GameEngine\SplooshKaboom.GameEngine.csproj" />
   </ItemGroup>
 
   <ItemGroup>

@@ -1,4 +1,4 @@
-﻿using SplooshGameEngine;
+﻿using Sploosh.UI.Resources;
 using System;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
