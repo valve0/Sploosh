@@ -6,6 +6,7 @@
     </ControlTemplate>
 
     <Style TargetType="Label" x:Key="NormalLabel">
+        
         <Setter Property="FontFamily" Value="Blackadder ITC"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -14,6 +15,7 @@
     </Style>
 
     <Style TargetType="TextBlock" x:Key="NormalTextBlock">
+        
         <Setter Property="FontFamily" Value="Blackadder ITC"/>
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="Background" Value="Transparent"/>
@@ -34,7 +36,7 @@
 
         <Setter Property="Template">
             <Setter.Value>
-
+                
                 <ControlTemplate TargetType="ToggleButton">
 
                     <Border x:Name="ButtonBorder" BorderBrush="Gray" BorderThickness="1"
@@ -48,7 +50,7 @@
                             <Image x:Name="ImageIcon" 
                                        HorizontalAlignment="Center"
                                        Width="80"
-                                       Source="/Images/X.png" 
+                                       Source="/Resources/Images/X.png" 
                                        Visibility="Collapsed"/>
 
                         </Grid>
@@ -96,8 +98,8 @@
                                        Grid.Row="1"
                                        Margin="0,-15,0,0"
                                        HorizontalAlignment="Center"
-                                       Width="80"
-                                       Source="/Images/Motif.png" 
+                                       Width="90"
+                                       Source="/Resources/Images/Motif.png" 
                                        Visibility="Collapsed"/>
                     </Grid>
 

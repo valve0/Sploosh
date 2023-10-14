@@ -1,6 +1,6 @@
 ﻿using System.Windows.Controls;
 
-namespace Sploosh.Controls
+namespace Sploosh.UI.Controls
 {
     public partial class HeaderControl : UserControl
     {

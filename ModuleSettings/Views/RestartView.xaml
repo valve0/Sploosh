@@ -1,0 +1,22 @@
+﻿<UserControl x:Class="Sploosh.Modules.Settings.Views.RestartView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="950" Width="1250"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+    <Grid>
+        <StackPanel VerticalAlignment="Center"
+                    HorizontalAlignment="Center"
+                    Margin="0,0,800,200">
+            <Label Content="Are you sure you wish to restart?"
+                   Style="{StaticResource NormalLabel}"/>
+            <Button Content="Yes"
+                    Width="100"
+                    Margin="0,10,0,0"
+                    Command="{Binding RestartCommand}"/>
+        </StackPanel>
+    </Grid>
+</UserControl>

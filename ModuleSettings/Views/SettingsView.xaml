@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="Sploosh.Modules.Settings.Views.SettingsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d"
+        Height="950" Width="1250"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+ 
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="auto"/>
+        </Grid.ColumnDefinitions>
+        <StackPanel Grid.Column="0" 
+                    Margin="50,0,50,50"
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center">
+            <Button Content="Sound"
+                    Margin="10"
+                    Command="{Binding OpenSettingsDetails}"
+                    CommandParameter="SoundView"/>
+            <Button Content="About"
+                    Margin="10"
+                    Command="{Binding OpenSettingsDetails}"
+                    CommandParameter="AboutView"/>
+            <Button Content="Help"
+                    Margin="10"
+                    Command="{Binding OpenSettingsDetails}"
+                    CommandParameter="HelpView"/>
+            <Button Content="Restart"
+                    Margin="10"
+                    Command="{Binding OpenSettingsDetails}"
+                    CommandParameter="RestartView"/>
+            <Button Content="Quit"
+                    Margin="10"
+                    Command="{Binding OpenSettingsDetails}"
+                    CommandParameter="QuitView"/>
+        </StackPanel>
+
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SettingsDetailsRegion"/>
+    </Grid>
+
+</UserControl>

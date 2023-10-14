@@ -1,0 +1,227 @@
+﻿<UserControl x:Class="Sploosh.Modules.Game.Views.GameUI"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        Height="900" Width="1400"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True">
+
+    <Grid>
+
+        <!-- LayoutGrid- Settings, Title and Feedback -->
+        <Grid ShowGridLines="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="800"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height="800"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+
+            
+            <Label Grid.Column="1"
+                   Grid.Row="2"
+                   Content="{Binding Feedback}"
+                   Margin="0,0,0,30"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   Style="{StaticResource NormalLabel}"
+            />
+
+            <!-- Bomb Grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="0"
+                  ShowGridLines="False">
+
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+         
+                    <StackPanel Grid.Row="0"
+                                Orientation="Horizontal"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center">
+
+                        <Label Content="Shot Counter "
+                               VerticalAlignment="Center"
+                               HorizontalAlignment="Center"
+                               Margin="10"
+                               Style="{StaticResource NormalLabel}"/>
+
+                        <Label  Content="{Binding ShotCounter}"
+                                VerticalAlignment="Center"
+                                HorizontalAlignment="Center"
+                                Margin="10"
+                                Style="{StaticResource NormalLabel}"/>
+
+                    </StackPanel>
+
+
+                <Viewbox Grid.Row="1" Stretch="Fill" >
+
+                    <ListView BorderBrush="Transparent"
+                              ItemsSource="{Binding BombImages}"
+                              HorizontalAlignment="Stretch"
+                              VerticalAlignment="Stretch"
+                              Background="Transparent">
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="3"
+                                             HorizontalAlignment="Center"
+                                             VerticalAlignment="Center"/>
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding FilePath}"
+                                       HorizontalAlignment="Center"
+                                       VerticalAlignment="Center"
+                                       Stretch="Fill" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+
+                    </ListView>
+
+                </Viewbox>
+
+            </Grid>
+
+            <!-- HighScore and Squids left grid -->
+            <Grid Grid.Row="0"
+                  Grid.Column="3"
+                  ShowGridLines="False">
+
+
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+
+
+                <StackPanel Orientation="Horizontal"
+                            VerticalAlignment="Center"
+                            HorizontalAlignment="Center">
+
+                    <Label Content="Highscore  "
+                           VerticalAlignment="Center"
+                           HorizontalAlignment="Center"
+                           Margin="10"
+                           Style="{StaticResource NormalLabel}"/>
+
+                    <Label x:Name="highScore"
+                           Content="{Binding HighScore}"
+                           HorizontalAlignment="Center"
+                           VerticalAlignment="Center"
+                           Margin="10"
+                           Style="{StaticResource NormalLabel}"/>
+
+                </StackPanel>
+
+
+
+                <Viewbox Grid.Row="1"
+                         HorizontalAlignment="Left"
+                         VerticalAlignment="Top"
+                         Height="300">
+                    
+                    <ListView BorderBrush="Transparent"
+                              ItemsSource="{Binding SquidsLeftImages}"
+                              HorizontalAlignment="Left"
+                              VerticalAlignment="Top"
+                              Background="Transparent"
+                              HorizontalContentAlignment="Right"
+                              VerticalContentAlignment="Top" >
+
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="Background" Value="Transparent" />
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ListViewItem}">
+                                            <ContentPresenter HorizontalAlignment="Left" />
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ListView.ItemContainerStyle>
+
+
+                        <ListView.ItemTemplate>
+                            <DataTemplate>
+                                <Image Source="{Binding FilePath}"
+                                       Height="25" Width="25"
+                                       VerticalAlignment="Top"
+                                       HorizontalAlignment="Left" />
+                            </DataTemplate>
+                        </ListView.ItemTemplate>
+                    </ListView>
+                </Viewbox>
+
+            </Grid>
+
+            <Border Grid.Row="0"
+                    Grid.Column="1"
+                    BorderBrush="Black"
+                    BorderThickness="1"  >
+
+                <!-- Main Squid Grid -->
+                <ListView Grid.Row="0"
+                          Grid.Column="1"
+                          ItemsSource="{Binding SquareImages}"
+                          ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                          ScrollViewer.VerticalScrollBarVisibility="Disabled"
+                          HorizontalAlignment="Left"
+                          VerticalAlignment="Top"
+                          SelectedIndex="{Binding SelectedIndex}"
+                          ItemContainerStyle="{StaticResource GridBorder}"
+                          Style="{StaticResource ListViewStyle}">
+
+                <ItemsControl.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="8"
+                                     HorizontalAlignment="Center"
+                                     VerticalAlignment="Center"/>
+                    </ItemsPanelTemplate>
+                </ItemsControl.ItemsPanel>
+
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                            <Image Source="{Binding FilePath}"
+                               HorizontalAlignment="Center"
+                               VerticalAlignment="Center"
+                               Stretch="Fill"  />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+
+
+                </ListView>
+            </Border>
+
+        </Grid>
+
+    </Grid>
+    
+</UserControl>
