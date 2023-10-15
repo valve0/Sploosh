@@ -1,0 +1,151 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <ControlTemplate x:Key="cornerButton">
+        <Image Source="yourimage.png"/>
+    </ControlTemplate>
+
+    <Style TargetType="Label" x:Key="NormalLabel">
+        
+        <Setter Property="FontFamily" Value="Blackadder ITC"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="30"/>
+
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="NormalTextBlock">
+        
+        <Setter Property="FontFamily" Value="Blackadder ITC"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="30"/>
+    </Style>
+
+
+    <Style TargetType="ToggleButton">
+
+        <Setter Property="FontFamily" Value="Blackadder ITC"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Margin" Value="5"/>
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="Height" Value="20" />
+        <Setter Property="Width" Value="20" />
+
+        <Setter Property="Template">
+            <Setter.Value>
+                
+                <ControlTemplate TargetType="ToggleButton">
+
+                    <Border x:Name="ButtonBorder" BorderBrush="Gray" BorderThickness="1"
+                                Background="{TemplateBinding Background}">
+
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+
+                            <!-- Main Button Content -->
+                            <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" Margin="0,0,50,0"/>
+
+                            <Image x:Name="ImageIcon" 
+                                       HorizontalAlignment="Center"
+                                       Width="80"
+                                       Source="/Resources/Images/X.png" 
+                                       Visibility="Collapsed"/>
+
+                        </Grid>
+                    </Border>
+
+                    <ControlTemplate.Triggers>
+                        <!-- Show the Image when the Button is Checked -->
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="ImageIcon" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+    <Style TargetType="Button">
+        <Setter Property="FontFamily" Value="Blackadder ITC"/>
+        <Setter Property="Foreground" Value="Black"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontSize" Value="30"/>
+        <Setter Property="Margin" Value="5"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+
+                <ControlTemplate TargetType="Button">
+
+                    <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="40" />
+                            <RowDefinition Height="20" />
+                        </Grid.RowDefinitions>
+
+                        <TextBlock Text="{TemplateBinding Content}" 
+                                       Grid.Row="0"                                    
+                                       HorizontalAlignment="Center"/>
+
+                        <Image x:Name="MyImage" 
+                                       Grid.Row="1"
+                                       Margin="0,-15,0,0"
+                                       HorizontalAlignment="Center"
+                                       Width="90"
+                                       Source="/Resources/Images/Motif.png" 
+                                       Visibility="Collapsed"/>
+                    </Grid>
+
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Button.IsMouseOver" Value="True">
+                            <Setter TargetName="MyImage" Property="Visibility" Value="Visible"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+
+
+                </ControlTemplate>
+
+            </Setter.Value>
+        </Setter>
+
+    </Style>
+
+
+    <Style x:Key="GridBorder" TargetType="{x:Type ListViewItem}">
+
+        <Setter Property="BorderThickness" Value="0.5"/>
+        <Setter Property="BorderBrush" Value="Black"/>
+        <Setter Property="Foreground" Value="Yellow"/>
+        <Setter Property="Background" Value="Transparent"/>
+
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ListViewItem}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}" Opacity="0.7">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="Wheat"/>
+                <Setter Property="Opacity" Value="0.7"/>
+            </Trigger>
+        </Style.Triggers>
+
+
+    </Style>
+
+    <Style TargetType="ListView" x:Key="ListViewStyle">
+        <Setter Property="Background" Value="Transparent"></Setter>
+    </Style>
+
+</ResourceDictionary>
