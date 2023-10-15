@@ -11,6 +11,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\Sploosh.Services\Sploosh.Services.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Compile Update="Views\SplashView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>

@@ -7,15 +7,18 @@ namespace ModuleSettings
 {
     public class SettingsModule : IModule
     {
+        private IRegionManager _regionManager;
+
         public SettingsModule(IRegionManager regionManager)
         {
-            regionManager.RegisterViewWithRegion("ContentRegion", typeof(SettingsView));
+            _regionManager = regionManager;
+            _regionManager.RegisterViewWithRegion("ContentRegion", typeof(SettingsView));
         }
 
 
         public void OnInitialized(IContainerProvider containerProvider)
         {
-            
+
         }
 
         public void RegisterTypes(IContainerRegistry containerRegistry)

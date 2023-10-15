@@ -4,11 +4,39 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         mc:Ignorable="d"
-        Height="950" Width="1250"
+        Height="1000" Width="1400"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True">
- 
+
+
     <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Row="0">
+
+            <Label
+                   FontSize="70"
+                   Content="Settings"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource NormalLabel}"
+        />
+
+            <Button 
+                Command="{Binding NavigateGameCommand}"
+                CommandParameter="GameUI"
+                Content="Game"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Margin="0,5,20,0"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="300"/>
             <ColumnDefinition Width="auto"/>
@@ -41,5 +69,5 @@
 
         <ContentControl Grid.Column="1" prism:RegionManager.RegionName="SettingsDetailsRegion"/>
     </Grid>
-
+    </Grid>
 </UserControl>

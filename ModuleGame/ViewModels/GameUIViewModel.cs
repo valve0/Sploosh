@@ -1,5 +1,7 @@
-﻿using Prism.Events;
+﻿using Prism.Commands;
+using Prism.Events;
 using Prism.Mvvm;
+using Prism.Regions;
 using Sploosh.GameEngine;
 using Sploosh.Services;
 using Sploosh.UI.Events;
@@ -12,6 +14,7 @@ namespace Sploosh.Modules.Game.ViewModels
 {
     public class GameUIViewModel : BindableBase
     {
+        private IRegionManager _regionManager;
         private IEventAggregator _eventAggregator;
         public GameState _gameState;
 
@@ -29,8 +32,10 @@ namespace Sploosh.Modules.Game.ViewModels
 
         // LOAD part of Game Loop. Called just once at the beginning of the game; used to set up
         //game objects, variables, etc. and prepare the game world.
-        public GameUIViewModel(IEventAggregator eventAggregator)
+        public GameUIViewModel(IRegionManager regionManager, IEventAggregator eventAggregator)
         {
+
+            _regionManager = regionManager;
             _eventAggregator = eventAggregator;
 
             _gameState = new GameState();
@@ -45,8 +50,21 @@ namespace Sploosh.Modules.Game.ViewModels
             SoundEffectsPlayer.Volume = 0;
 
             _eventAggregator.GetEvent<SoundStateEvent>().Subscribe(OnMessageReceived);
-
             _eventAggregator.GetEvent<RestartGameEvent>().Subscribe(RestartGame);
+
+            NavigateSettingsCommand = new DelegateCommand<string>(NavigateSettings);
+        }
+
+        public DelegateCommand<string> NavigateSettingsCommand { get; private set; }
+
+        private void NavigateSettings(string navigationPath)
+        {
+
+            if (string.IsNullOrEmpty(navigationPath))
+                throw new ArgumentNullException();
+
+            _regionManager.RequestNavigate("ContentRegion", navigationPath);
+
         }
 
         private void OnMessageReceived(string message)
@@ -144,37 +162,6 @@ namespace Sploosh.Modules.Game.ViewModels
         }
 
         /// <summary>
-        /// Runs everytime view model is loaded-checks for changes in user settings
-        /// </summary>
-        public void Load()
-        {
-            ////Check for updates in UserSettings
-            //if (UserSettings.SoundEffectsStatus == false)
-            //    SoundEffectsPlayer.Volume = 0;
-            //else
-            //    SoundEffectsPlayer.Volume = 0.2;
-
-            //if (UserSettings.RestartGameTrigger == true)
-            //{
-            //    UserSettings.UpdateRestartGameTrigger();
-            //    RestartGame();
-            //}
-
-        }
-
-        ///// <summary>
-        ///// Forces an update of the displayed properties in the main window
-        ///// At the moment the properties dont recognise when thier own properties get updated so need to force it
-        ///// </summary>
-        //private void UpdateMainWindow()
-        //{
-        //    BombImages = new ObservableCollection<Uri>(BombImages);
-        //    OneDSquares = new ObservableCollection<Uri>(OneDSquares);
-        //    SquidsLeftImages = new ObservableCollection<Uri>(SquidsLeftImages);
-        //}
-
-
-        /// <summary>
         /// UPDATE GAME: part of game loop
         /// Run when a square on the grid is selected. If the square has a squid
         /// then attack logic is performed, elseif there is no squid present then miss logic is run. 
@@ -244,39 +231,13 @@ namespace Sploosh.Modules.Game.ViewModels
 
             ShotCounter = _gameState.ShotCount;
 
-
-            //Force update to object properties
-            //SquareImages = SquareImages;
-            //SquidsLeftImages = SquidsLeftImages;
-            //BombImages = BombImages;
-
+            //RENDER PART OF GAMELOOP
+            //Force Update Dsipalyed Properties
             BombImages = new ObservableCollection<ImageHolder>(BombImages);
             SquareImages = new ObservableCollection<ImageHolder>(SquareImages);
             SquidsLeftImages = new ObservableCollection<ImageHolder>(SquidsLeftImages);
 
         }
-
-        //RENDER PART OF GAMELOOP
-
-
-
-
-        ///// <summary>
-        ///// Checks whether the final score of the user beats that of the stored Highscore
-        ///// If so, it updates the Highscore property and writes the new result to the Highscore file.
-        ///// </summary>
-        //private void CheckForHighScore()
-        //{
-
-        //    if (ShotCounter < Highscore)
-        //    {
-        //        //update highscore property and textfile
-        //        Highscore = ShotCounter;
-        //        FileRepository.WriteStringToFile(GameState.HighscoreFileName, Highscore.ToString());
-
-        //    }
-
-        //}
 
         /// <summary>
         /// This plasy the background music on loop
@@ -286,38 +247,6 @@ namespace Sploosh.Modules.Game.ViewModels
             backgroundPlayer.Position = TimeSpan.Zero;
             backgroundPlayer.Play();
         }
-
-
-        /// <summary>
-        /// When the attack method is called this plays the appropriate 
-        /// sound effect for a hit/miss
-        ///// </summary>
-        //private void PlayAttackSounds(bool hit)
-        //{
-
-        //    if (hit == true)
-        //    {
-
-
-        //    }
-        //    else
-        //    {
-
-        //    }
-
-        //}
-
-        ///// <summary>
-        ///// When the Squid Killed event occurs this plays the appropriate sound effect
-        ///// </summary>
-        //private void PlaySquidKilledSound()
-        //{
-
-
-        //}
-
-
     }
-
 }
 

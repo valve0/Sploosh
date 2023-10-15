@@ -23,7 +23,7 @@ namespace Sploosh.UI
 
         protected override void ConfigureModuleCatalog(IModuleCatalog moduleCatalog)
         {
-            //moduleCatalog.AddModule<SplashModule>();
+            moduleCatalog.AddModule<SplashModule>();
             moduleCatalog.AddModule<GameModule>();
             moduleCatalog.AddModule<SettingsModule>();
         }

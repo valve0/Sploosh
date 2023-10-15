@@ -3,13 +3,39 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        Height="900" Width="1400"
+        Height="1000" Width="1400"
         xmlns:prism="http://prismlibrary.com/"
         prism:ViewModelLocator.AutoWireViewModel="True">
-
     <Grid>
 
-        <!-- LayoutGrid- Settings, Title and Feedback -->
+        <Grid.RowDefinitions>
+            <RowDefinition Height="100"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <Grid Grid.Row="0">
+
+            <Label
+                   FontSize="70"
+                   Content="Sploosh"
+                   VerticalAlignment="Center"
+                   HorizontalAlignment="Center"
+                   Style="{StaticResource NormalLabel}"
+        />
+
+            <Button 
+                Command="{Binding NavigateSettingsCommand}"
+                CommandParameter="SettingsView"
+                Content="Settings"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Right"
+                Margin="0,5,20,0"/>
+
+        </Grid>
+
+        <Grid Grid.Row="1">
+            <!-- LayoutGrid- Settings, Title and Feedback -->
         <Grid ShowGridLines="False">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -223,5 +249,7 @@
         </Grid>
 
     </Grid>
-    
+
+    </Grid>
+
 </UserControl>
