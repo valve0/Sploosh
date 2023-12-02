@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\..\..\..\Desktop\Projects\Sploosh.GameEngine\Sploosh.GameEngine\Sploosh.GameEngine.csproj" />
+    <ProjectReference Include="..\Sploosh.GameEngine\Sploosh.GameEngine\Sploosh.GameEngine.csproj" />
     <ProjectReference Include="..\Sploosh.Services\Sploosh.Services.csproj" />
   </ItemGroup>
 

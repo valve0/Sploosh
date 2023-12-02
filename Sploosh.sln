@@ -7,10 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.UI", "Sploosh.UI\Sp
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.UI.Tests", "Sploosh.UI.Tests\Sploosh.UI.Tests.csproj", "{F4F53C69-F8E0-4FB8-B6B4-DAE96F571C65}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.GameEngine", "..\..\..\..\Desktop\Projects\Sploosh.GameEngine\Sploosh.GameEngine\Sploosh.GameEngine.csproj", "{85EE9692-E37A-422B-BE69-802810129398}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.GameEngine.Tests", "..\..\..\..\Desktop\Projects\Sploosh.GameEngine\Sploosh.GameEngine.Tests\Sploosh.GameEngine.Tests.csproj", "{3785A325-02C4-462A-8FDB-8376E600804D}"
-EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.Modules.Game", "ModuleGame\Sploosh.Modules.Game.csproj", "{2FF5A170-117A-40A7-8015-029CAD444332}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.Modules.Settings", "ModuleSettings\Sploosh.Modules.Settings.csproj", "{B462FDB9-B113-4371-9E26-722CCA6A1973}"
@@ -19,7 +15,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.Modules.Splash", "M
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Modules", "Modules", "{C5CCC686-DA83-4EB5-9AE9-35B2801D5A1B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sploosh.Services", "Sploosh.Services\Sploosh.Services.csproj", "{735EE106-0472-484C-B0B1-6D055F8E96F3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.Services", "Sploosh.Services\Sploosh.Services.csproj", "{735EE106-0472-484C-B0B1-6D055F8E96F3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.GameEngine", "Sploosh.GameEngine\Sploosh.GameEngine\Sploosh.GameEngine.csproj", "{B969E8D1-995C-401A-8987-EB9E0C0122B3}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sploosh.GameEngine.Tests", "Sploosh.GameEngine\Sploosh.GameEngine.Tests\Sploosh.GameEngine.Tests.csproj", "{6E0F495B-E0E7-4B60-966E-DC556746FDF7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -35,14 +35,6 @@ Global
 		{F4F53C69-F8E0-4FB8-B6B4-DAE96F571C65}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F4F53C69-F8E0-4FB8-B6B4-DAE96F571C65}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F4F53C69-F8E0-4FB8-B6B4-DAE96F571C65}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85EE9692-E37A-422B-BE69-802810129398}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85EE9692-E37A-422B-BE69-802810129398}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85EE9692-E37A-422B-BE69-802810129398}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85EE9692-E37A-422B-BE69-802810129398}.Release|Any CPU.Build.0 = Release|Any CPU
-		{3785A325-02C4-462A-8FDB-8376E600804D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{3785A325-02C4-462A-8FDB-8376E600804D}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{3785A325-02C4-462A-8FDB-8376E600804D}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{3785A325-02C4-462A-8FDB-8376E600804D}.Release|Any CPU.Build.0 = Release|Any CPU
 		{2FF5A170-117A-40A7-8015-029CAD444332}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2FF5A170-117A-40A7-8015-029CAD444332}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FF5A170-117A-40A7-8015-029CAD444332}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -59,6 +51,14 @@ Global
 		{735EE106-0472-484C-B0B1-6D055F8E96F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{735EE106-0472-484C-B0B1-6D055F8E96F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{735EE106-0472-484C-B0B1-6D055F8E96F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B969E8D1-995C-401A-8987-EB9E0C0122B3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B969E8D1-995C-401A-8987-EB9E0C0122B3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B969E8D1-995C-401A-8987-EB9E0C0122B3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B969E8D1-995C-401A-8987-EB9E0C0122B3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E0F495B-E0E7-4B60-966E-DC556746FDF7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E0F495B-E0E7-4B60-966E-DC556746FDF7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E0F495B-E0E7-4B60-966E-DC556746FDF7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E0F495B-E0E7-4B60-966E-DC556746FDF7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
