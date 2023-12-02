@@ -1,0 +1,3 @@
+[submodule "Sploosh.GameEngine"]
+	path = Sploosh.GameEngine
+	url = https://github.com/valve0/Sploosh.GameEngine.git
